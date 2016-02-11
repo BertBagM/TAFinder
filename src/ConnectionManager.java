@@ -29,7 +29,7 @@ public class ConnectionManager
 			connection = DriverManager.getConnection(url, uid, pw);
 
 		} catch (Exception e) {
-			System.out.println("fuck");
+			System.out.println("Log into UBC VPN");
 		}
 		// Note: Must assign connection to instance variable as well as
 		// returning it back to the caller

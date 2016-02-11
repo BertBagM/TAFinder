@@ -20,14 +20,11 @@ import org.json.simple.parser.ParseException;
  * My credentials are in the connection managaer if you want to log into sqrl etc to check
  * 
  * 
- * Issues : 
- * Start / endtime are in doubles, need to be changed to time.
- * Set to doubles for error checking
- * Unknown if course/sec number need to be an integer
- * Having issues with "extra labs"
- * Attempting to deal with it during data - > database insertions unfinished
+ * This program builds the "Lab" table from excel data. As long as input is in the same format as the original
+ * spreadsheet. 
  * 
- * Last update 6:30 Feb 10 
+ * 
+ * Last update Feb 11 
  * Brett M
  */
 
@@ -37,15 +34,16 @@ public class createLabsInDb {
 
 	static ArrayList<String> instructor = new ArrayList<String>();
 	static ArrayList<String> subject = new ArrayList<String>();
-	static ArrayList<String> courseNo = new ArrayList<String>();
+	static ArrayList<Integer> courseNo = new ArrayList<Integer>();
 	static ArrayList<String> secNo = new ArrayList<String>();
-	static ArrayList<String> term = new ArrayList<String>();
+	static ArrayList<Integer> term = new ArrayList<Integer>();
 	static ArrayList<String> activity = new ArrayList<String>();
 	static ArrayList<String> days = new ArrayList<String>();
 	static ArrayList<String> startTime = new ArrayList<String>();
 	static ArrayList<String> endTime = new ArrayList<String>(); // might be
 																// weird / time
 
+	static ArrayList<String> hours = new ArrayList<String>();
 	ArrayList<lab> Labs;
 
 	static Connection con;
@@ -86,55 +84,40 @@ public class createLabsInDb {
 	// inserts data into lab table
 
 	private static void ImportLabDataIntoDb() {
-		String sql = "INSERT INTO lab(instructor , subject , courseNo, secNo, term, activity, days, startTime, endTime) "
-				+ "Values (?, ?, ?,?,?,?,?,?,?);";
+		String sql = "INSERT INTO lab(instructor , subject , courseNo, secNo, term, activity, days, startTime, endTime, hours) "
+				+ "Values (?, ?, ?,?,?,?,?,?,?,?);";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(sql);
 			for (int i = 0; i < instructor.size(); i++) {
+				Boolean valid = false;
 
-				// need to make a method for this
+				// filters and removes all the "extras"
+				while (!valid) {
+					if (!hours.get(i).equals("0.0") && !activity.get(i).equals("LEC")) {
+						valid = true;
+					} else {
+						i++;
+					}
 
-				if (instructor.get(i).equals("Instructor Name")) {
-					i++;
 				}
-
-				if (subject.get(i).equals("Subject")) {
-					i++;
-				}
-				if (subject.get(i).equals("")) {
-					i++;
-				}
-
-				if (activity.get(i).equals("")) {
-					i++;
-				}
-
-				if (instructor.get(i).equals("")) {
-					i++;
-				}
-
-				if (instructor.get(i).equals("")) {
-					i++;
-				}
-
-				// to here
 
 				pstmt.setString(1, instructor.get(i));
 				pstmt.setString(2, subject.get(i));
-				pstmt.setString(3, courseNo.get(i));
+				pstmt.setInt(3, courseNo.get(i));
 				pstmt.setString(4, secNo.get(i));
-				pstmt.setString(5, term.get(i));
+				pstmt.setInt(5, term.get(i));
 				pstmt.setString(6, activity.get(i));
 				pstmt.setString(7, days.get(i));
 				pstmt.setString(8, startTime.get(i));
 				pstmt.setString(9, endTime.get(i));
+				pstmt.setString(10, hours.get(i));
 				pstmt.executeUpdate();
 
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 
 	}
@@ -142,7 +125,7 @@ public class createLabsInDb {
 	// creates lab table
 	private static void createLab() {
 
-		String sql = "CREATE TABLE lab (instructor varChar(30), subject varChar(30), courseNo varChar(30), secNo varChar(30), term varChar(4), activity varChar(30), days varChar(30),startTime varChar(30), endTime varChar(30));";
+		String sql = "CREATE TABLE lab (instructor varChar(30), subject varChar(30), courseNo Integer, secNo varChar(30), term Integer, activity varChar(30), days varChar(30),startTime varChar(30), endTime varChar(30), hours Double);";
 		Statement stmt = null;
 		try {
 			stmt = con.createStatement();
@@ -201,14 +184,15 @@ public class createLabsInDb {
 
 					} else if (cell.getColumnIndex() == 2) {
 
-						String course;
+						Integer cNo = 0;;
 						try {
-							course = Double.toString(cell.getNumericCellValue());
-						} catch (Exception e) {
-							course = cell.getStringCellValue();
-						}
 
-						courseNo.add(course);
+							cNo = (int) cell.getNumericCellValue();
+						} catch (Exception e) {
+							
+						}
+						courseNo.add(cNo);
+
 
 					} else if (cell.getColumnIndex() == 4) {
 
@@ -222,14 +206,16 @@ public class createLabsInDb {
 
 					} else if (cell.getColumnIndex() == 5) {
 
-						String sNo;
+						Integer tNo = 0;;
 						try {
-							sNo = Double.toString(cell.getNumericCellValue());
+
+							tNo = (int) cell.getNumericCellValue();
 						} catch (Exception e) {
-							sNo = cell.getStringCellValue();
+							
+
 						}
 
-						term.add(sNo);
+						term.add(tNo);
 
 					} else if (cell.getColumnIndex() == 6) {
 
@@ -241,30 +227,42 @@ public class createLabsInDb {
 
 					} else if (cell.getColumnIndex() == 8) {
 
-						String sNo;
-						try {
-							sNo = Double.toString(cell.getNumericCellValue());
-						} catch (Exception e) {
-							sNo = cell.getStringCellValue();
+						String sTime ="";
+							
+						try{
+							sTime = cell.getDateCellValue().toString();
+							sTime = sTime.replace("Sun Dec 31 ", "");
+							sTime = sTime.replace(" PST 1899", "");
+						}catch(Exception e){
 						}
+						
 
-						startTime.add(sNo);
+						startTime.add(sTime);
 
 					} else if (cell.getColumnIndex() == 9) {
 
-						String sNo;
-						try {
-							sNo = Double.toString(cell.getNumericCellValue());
-						} catch (Exception e) {
-							sNo = cell.getStringCellValue();
+						String eTime ="";
+						
+						try{
+							eTime = cell.getDateCellValue().toString();
+							eTime = eTime.replace("Sun Dec 31 ", "");
+							eTime = eTime.replace(" PST 1899", "");
+						}catch(Exception e){
 						}
-
-						endTime.add(sNo);
+						endTime.add(eTime);
 
 					}
-					// gonna need to deal with hours at a later date
-					else if (cell.getColumnIndex() == 11) {
+					
+					else if (cell.getColumnIndex() == 16) {
 
+						String hNo;
+						try {
+							hNo = Double.toString(cell.getNumericCellValue());
+						} catch (Exception e) {
+							hNo = cell.getStringCellValue();
+						}
+
+						hours.add(hNo);
 					}
 
 				}
