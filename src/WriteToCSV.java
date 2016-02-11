@@ -33,7 +33,6 @@ public class WriteToCSV {
 		 * //ArrayList<Product> products = getProducts(handles, CYCInv);
 		 * //writeCSV(products, fileName
 		 */
-
 	}
 
 	// returns an arrayList of Handles
