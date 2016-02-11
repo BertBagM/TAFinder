@@ -40,30 +40,33 @@ public class createLabsInDb {
 	static ArrayList<String> activity = new ArrayList<String>();
 	static ArrayList<String> days = new ArrayList<String>();
 	static ArrayList<String> startTime = new ArrayList<String>();
-	static ArrayList<String> endTime = new ArrayList<String>(); // might be
-																// weird / time
-
+	static ArrayList<String> endTime = new ArrayList<String>();
 	static ArrayList<String> hours = new ArrayList<String>();
-	ArrayList<lab> Labs;
 
 	static Connection con;
 
 	public static void main(String[] args) {
 
-		String fileName = "COSC 310 - Term 2 Course  and TA spreadsheet.xlsx";
+		try {
 
-		openSqlConnection();
+			String fileName = "COSC 310 - Term 2 Course  and TA spreadsheet.xlsx";
 
-		ImportLabDataIntoArrayLists(fileName);
+			openSqlConnection();
 
-		dropLabTable();
+			ImportLabDataIntoArrayLists(fileName);
 
-		createLab();
+			dropLabTable();
 
-		ImportLabDataIntoDb();
+			createLab();
 
-		System.out.println("finshed loading labs into db");
+			ImportLabDataIntoDb();
 
+			System.out.println("Finshed loading labs into db");
+
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// opens sql connection to the cosc 304 database using bretts credentials
@@ -94,7 +97,7 @@ public class createLabsInDb {
 
 				// filters and removes all the "extras"
 				while (!valid) {
-					if (!hours.get(i).equals("0.0") && !activity.get(i).equals("LEC")) {
+					if (!hours.get(i).equals("0.0") && !activity.get(i).equals("LEC") && term.get(i) > 0) {
 						valid = true;
 					} else {
 						i++;
@@ -184,15 +187,15 @@ public class createLabsInDb {
 
 					} else if (cell.getColumnIndex() == 2) {
 
-						Integer cNo = 0;;
+						Integer cNo = 0;
+						;
 						try {
 
 							cNo = (int) cell.getNumericCellValue();
 						} catch (Exception e) {
-							
+
 						}
 						courseNo.add(cNo);
-
 
 					} else if (cell.getColumnIndex() == 4) {
 
@@ -206,12 +209,12 @@ public class createLabsInDb {
 
 					} else if (cell.getColumnIndex() == 5) {
 
-						Integer tNo = 0;;
+						Integer tNo = 0;
+						;
 						try {
 
 							tNo = (int) cell.getNumericCellValue();
 						} catch (Exception e) {
-							
 
 						}
 
@@ -227,32 +230,31 @@ public class createLabsInDb {
 
 					} else if (cell.getColumnIndex() == 8) {
 
-						String sTime ="";
-							
-						try{
+						String sTime = "";
+
+						try {
 							sTime = cell.getDateCellValue().toString();
 							sTime = sTime.replace("Sun Dec 31 ", "");
 							sTime = sTime.replace(" PST 1899", "");
-						}catch(Exception e){
+						} catch (Exception e) {
 						}
-						
 
 						startTime.add(sTime);
 
 					} else if (cell.getColumnIndex() == 9) {
 
-						String eTime ="";
-						
-						try{
+						String eTime = "";
+
+						try {
 							eTime = cell.getDateCellValue().toString();
 							eTime = eTime.replace("Sun Dec 31 ", "");
 							eTime = eTime.replace(" PST 1899", "");
-						}catch(Exception e){
+						} catch (Exception e) {
 						}
 						endTime.add(eTime);
 
 					}
-					
+
 					else if (cell.getColumnIndex() == 16) {
 
 						String hNo;
