@@ -15,26 +15,27 @@ import java.sql.SQLException;
 
 public class ConnectionManager
 {
-    public static final String configFile = "config/server.json";
     private static Connection connection = null;
 
 
     public static Connection open() throws IOException, ParseException, SQLException
     {
-    	System.out.println("Connecting to database.");
+    	String url = "jdbc:mysql://cosc304.ok.ubc.ca/db_bmclaren";
+		String uid = "bmclaren";
+		String pw = "56301147";
 
-        if (connection == null)
-        {
-            HashMap<String, String> serverConfig = parseServerConfig();
+		System.out.println("Connecting to database.");
+		try {
+			connection = DriverManager.getConnection(url, uid, pw);
 
-            connection = DriverManager.getConnection(
-                serverConfig.get("url"),
-                serverConfig.get("username"),
-                serverConfig.get("password")
-            );
-        }
-
-        return connection;
+		} catch (Exception e) {
+			System.out.println("fuck");
+		}
+		// Note: Must assign connection to instance variable as well as
+		// returning it back to the caller
+		// TODO: Make a connection to the database and store connection in con
+		// variable before returning it.
+		return connection;
     }
 
     public static void close() throws SQLException
@@ -49,19 +50,4 @@ public class ConnectionManager
         connection = null;
     }
 
-    private static HashMap<String, String> parseServerConfig() throws IOException, ParseException
-    {
-        HashMap<String, String> data = new HashMap<String, String>();
-
-        JSONParser parser = new JSONParser();
-        byte[] encodedJson = Files.readAllBytes(Paths.get(configFile));
-        String jsonString = new String(encodedJson, StandardCharsets.UTF_8);
-        JSONObject json = (JSONObject)parser.parse(jsonString);
-
-        data.put("url", (String)json.get("url"));
-        data.put("username", (String)json.get("username"));
-        data.put("password", (String)json.get("password"));
-
-        return data;
-    }
 }

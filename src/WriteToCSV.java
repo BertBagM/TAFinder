@@ -15,7 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 // iunno wtf + means, so it gets set to 100 for inventory
 // 
 public class WriteToCSV {
-	public static void main(String[] args) {
+	public static void mainNOT(String[] args) {
 
 		// gravCYC
 		String fileName = "GraveyardCYC.xlsx";// graveyard handles
