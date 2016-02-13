@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   root 'applications#new'
 
   get 'application' => 'applications#new'
-  get 'course' => 'courses#index'
+
+  namespace :admin do
+    get 'course' => 'courses#index'
+  end
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
