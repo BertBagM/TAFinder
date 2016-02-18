@@ -6,6 +6,12 @@ Rails.application.routes.draw do
 
   get 'application' => 'applications#new'
 
+  scope :admin do
+    get 'login' => 'sessions#new'
+    post 'login' => 'sessions#create'
+    post 'logout' => 'sessions#destroy'
+  end
+
   namespace :admin do
     get 'course' => 'courses#index'
   end
