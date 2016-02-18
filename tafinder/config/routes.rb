@@ -4,12 +4,14 @@ Rails.application.routes.draw do
 
   root 'applications#new'
 
-  get 'applications' => 'applications#new'
+  get 'applications/new' => 'applications#new'
 
   scope :admin do
     get 'login' => 'sessions#new'
     post 'login' => 'sessions#create'
     post 'logout' => 'sessions#destroy'
+
+    get 'applications' => 'applications#index'
 
     get 'courses' => 'courses#index'
   end

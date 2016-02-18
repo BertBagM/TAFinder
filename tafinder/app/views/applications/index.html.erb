@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <% if (@applications.empty?) %>
+
+            <div class="well well-lg text-center">
+                <h4>No applications to display.</h4>
+            </div>
+
+            <% else %>
+
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>ID</th>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+
+                <% @applications.each do |application| %>
+                <tr>
+                    <td><%= application.id %></td>
+                    <td><%= application.student_id %></td>
+                    <td><%= application.name %></td>
+                    <td>
+                        <a href="<%= application_edit_path(application) %>" class="glyphicon glyphicon-pencil"></a>
+                    </td>
+                </tr>
+                <% end %>
+            </table>
+
+        <% end %>
+        </div>
+    </div>
+</div>
