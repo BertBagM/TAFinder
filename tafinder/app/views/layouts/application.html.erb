@@ -36,7 +36,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="<%= admin_courses_path %>">Course List</a>
+                                        <a href="<%= courses_path %>">Course List</a>
                                     </li>
                                 </ul>
                             </li>
@@ -48,7 +48,7 @@
                             </li>
                         <% else %>
                             <li>
-                                <a href="/admin/login">Login</a>
+                                <a href="<%= login_path %>">Login</a>
                             </li>
                         <% end %>
                     </ul>
