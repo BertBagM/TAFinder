@@ -9,15 +9,6 @@
 
     <body>
 
-        <% flash.each do |key, value| %>
-            <div class="alert alert-dismissible alert-<%= key %>" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <span><%= value %></span>
-            </div>
-        <% end %>
-
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -74,6 +65,15 @@
                 </div>
             </div>
         </nav>
+
+        <% flash.each do |key, value| %>
+            <div class="alert alert-dismissible alert-<%= key %>" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <span><%= value %></span>
+            </div>
+        <% end %>
 
         <%= yield %>
 
