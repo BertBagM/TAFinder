@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get 'course' => 'courses#index'
+    get 'courses' => 'courses#index'
   end
 
   # You can have the root of your site routed with "root"
