@@ -1,8 +1,8 @@
 class AdminController < ApplicationController
-    before_action :require_admin
+  before_action :validate_logged_in
 
 
-    def require_admin
-        # TODO: validate admin user here
-    end
+  def validate_logged_in
+    redirect_to('/') unless logged_in?
+  end
 end
