@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
     if (authorized_user)
       session[:user_id] = authorized_user.id
-      redirect_to('/admin/course')
+      redirect_to(courses_path)
     else
       flash.now[:danger] = 'Invalid email or password'
       render('new')
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to('/')
+    redirect_to(root_path)
   end
 
 
