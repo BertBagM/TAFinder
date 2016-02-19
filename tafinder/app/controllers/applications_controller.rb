@@ -10,6 +10,10 @@ class ApplicationsController < ApplicationController
   end
 
   def edit
+    @application = Application.find_by_id(params[:id])
+
+    flash[:warning] = "No applications were found with ID #{params[:id]}."
+    redirect_to(action: :index) unless @application.present?
   end
 
   def update

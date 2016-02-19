@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     post 'login' => 'sessions#create'
     post 'logout' => 'sessions#destroy'
 
-    get 'applications' => 'applications#index'
+    resources 'applications', only: [:index, :edit, :update]
 
     get 'courses' => 'courses#index'
   end
