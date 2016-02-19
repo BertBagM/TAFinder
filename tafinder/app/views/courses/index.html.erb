@@ -1,3 +1,35 @@
-<h1>Courses List</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <% if (@courses.empty?) %>
 
-<p>Note: Don't put body/html tags here, the HTML here replaces < %= yield % > in views/layouts/application.html.erb</p>
+            <div class="well well-lg text-center">
+                <h4>No courses to display.</h4>
+            </div>
+
+            <% else %>
+
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Section</th>
+                    <th></th>
+                </tr>
+
+                <% @courses.each do |course| %>
+                <tr>
+                    <td><%= course.id %></td>
+                    <td><%= course.name %></td>
+                    <td><%= course.section %></td>
+                    <td>
+                        <a href="<%# course_edit_path(course) %>" class="glyphicon glyphicon-pencil"></a>
+                    </td>
+                </tr>
+                <% end %>
+            </table>
+
+        <% end %>
+        </div>
+    </div>
+</div>
