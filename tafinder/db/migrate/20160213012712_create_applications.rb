@@ -4,7 +4,7 @@ class CreateApplications < ActiveRecord::Migration
     	t.integer	:studentNum
     	t.string	:firstName
     	t.string	:lastName
-    	t.string	:emailAddress
+    	t.string	:email
     	t.decimal :GPA
     	t.string	:faculty
     	t.integer	:yearOfStudy
