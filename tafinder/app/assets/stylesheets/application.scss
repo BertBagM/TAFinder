@@ -33,4 +33,8 @@
 
     outline: none;
     text-decoration: none;
+
+    &:focus {
+        outline: none;
+    }
 }
