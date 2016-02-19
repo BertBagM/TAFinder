@@ -2,7 +2,8 @@
     <div class="row">
         <div class="col-xs-12">
 
-            <form accept-charset="UTF-8" action="<%= applications_edit_path %>" method="patch">
+            <form accept-charset="UTF-8" action="<%= application_path %>" method="post">
+                <input name="_method" type="hidden" value="patch" />
 
             </form>
 
