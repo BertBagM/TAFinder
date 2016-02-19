@@ -14,8 +14,28 @@
 ActiveRecord::Schema.define(version: 20160215011023) do
 
   create_table "applications", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "studentNum"
+    t.string   "firstName"
+    t.string   "lastName"
+    t.string   "email"
+    t.decimal  "GPA"
+    t.string   "faculty"
+    t.integer  "yearOfStudy"
+    t.boolean  "graduateStudent"
+    t.integer  "ubcEmployeeId"
+    t.string   "program"
+    t.string   "gender"
+    t.string   "streetAddress"
+    t.string   "city"
+    t.string   "postalCode"
+    t.string   "homePhone"
+    t.string   "cellPhone"
+    t.boolean  "graduateFTStatus"
+    t.boolean  "previousUTAPosition"
+    t.integer  "preferredHours"
+    t.integer  "maximumHours"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "courses", force: :cascade do |t|
