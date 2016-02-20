@@ -14,16 +14,22 @@
                     <th>ID</th>
                     <th>Student ID</th>
                     <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>GPA</th>
                     <th></th>
                 </tr>
 
                 <% @applications.each do |application| %>
                 <tr>
                     <td><%= application.id %></td>
-                    <td><%= application.student_id %></td>
-                    <td><%= application.name %></td>
+                    <td><%= application.studentNum %></td>
+                    <td><%= "#{application.firstName} #{application.lastName}" %></td>
+                    <td><%= application.email %></td>
+                    <td><%= application.cellPhone || appliaction.homePhone %></td>
+                    <td><%= application.GPA %></td>
                     <td>
-                        <a href="<%= application_edit_path(application) %>" class="glyphicon glyphicon-pencil"></a>
+                        <a href="<%# application_edit_path(application) %>" class="glyphicon glyphicon-pencil"></a>
                     </td>
                 </tr>
                 <% end %>
