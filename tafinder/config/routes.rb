@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'applications#new'
 
   get 'applications/new' => 'applications#new'
+  post 'applications' => 'applications#create'
 
   scope :admin do
     get 'login' => 'sessions#new'

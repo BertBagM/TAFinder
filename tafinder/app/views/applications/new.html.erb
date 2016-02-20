@@ -7,7 +7,8 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <form accept-charset="UTF-8" action="<%= applications_new_path %>" method="post">
+            <form accept-charset="UTF-8" action="<%= applications_path %>" method="post">
+            		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
 
             		<div class="form-group">
                     <label for="firstName-input">First Name</label>
@@ -31,17 +32,17 @@
 
                 <div class="form-group">
                     <label for="yearOfStudy-input">Year of Studies in 2015/16</label>
-                    <input id="yearOfStudy-input" type="number" name="application[yearOfStudy]" />
+                    <input id="yearOfStudy-input" type="number" name="application[yearOfStudy]" min="1" step="1"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="GPA-input">Current GPA</label>
+                    <input id="GPA-input" type="number" name="application[GPA]" min="0"/>
                 </div>
 
                 <div class="form-group">
                     <label for="ubcEmployeeId-input">UBC Employee ID</label>
                     <input id="ubcEmployeeId-input" type="text" name="application[ubcEmployeeId]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="program-input">Program</label>
-                    <input id="program-input" type="text" name="application[program]" />
                 </div>
 
                 <div class="form-group">
@@ -107,7 +108,7 @@
 		                </div>
 		            </div>
 
-                <button class="btn btn-default" type="submit">Login</button>
+                <button class="btn btn-default" type="submit">Submit Application</button>
             </form>
         </div>
     </div>
