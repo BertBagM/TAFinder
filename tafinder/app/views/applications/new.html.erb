@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
             <h1><b>Application for</b><br/> Undergraduate/Graduate Teaching <br/>Assistantship</h1>
@@ -8,107 +8,7 @@
     <div class="row">
         <div class="col-xs-12">
             <form accept-charset="UTF-8" action="<%= create_application_path %>" method="post">
-            		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
-
-            		<div class="form-group">
-                    <label for="firstName-input">First Name</label>
-                    <input id="firstName-input" type="text" name="application[firstName]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="lastName-input">Last Name</label>
-                    <input id="lastName-input" type="text" name="application[lastName]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="studentNum-input">Student #</label>
-                    <input id="studentNum-input" type="text" name="application[studentNum]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="faculty-input">Faculty</label>
-                    <input id="faculty-input" type="text" name="application[faculty]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="yearOfStudy-input">Year of Studies in 2015/16</label>
-                    <input id="yearOfStudy-input" type="number" name="application[yearOfStudy]" min="1" step="1"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="GPA-input">Current GPA</label>
-                    <input id="GPA-input" type="number" name="application[GPA]" min="0"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="ubcEmployeeId-input">UBC Employee ID</label>
-                    <input id="ubcEmployeeId-input" type="text" name="application[ubcEmployeeId]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="program-input">Program</label>
-                    <input id="program-input" type="text" name="application[program]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="gender-input">Gender</label>
-                    <input id="program-input" type="radio" name="application[gender]" value="Male"/> Male
-                    <input id="program-input" type="radio" name="application[gender]" value="Female"/> Female
-                </div>
-
-                <div class="form-group">
-                    <label for="email-input">UBC Email Address</label>
-                    <input id="email-input" type="email" name="application[email]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="streetAddress-input">Current Address</label>
-                    <input id="streetAddress-input" type="text" name="application[streetAddress]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="city-input">City</label>
-                    <input id="city-input" type="text" name="application[city]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="postalCode-input">Postal Code</label>
-                    <input id="postalCode-input" type="text" name="application[postalCode]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="homePhone-input">Telephone # (Home)</label>
-                    <input id="homePhone-input" type="text" name="application[homePhone]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="cellPhone-input">Telephone # (Cell)</label>
-                    <input id="cellPhone-input" type="text" name="application[cellPhone]" />
-                </div>
-
-                <div class="form-group">
-                    <label for="graduateFTStatus-input">Will you be a full-time graduate student in Winter 2015/16?</label>
-                    <input id="graduateFTStatus-input" type="radio" name="application[graduateFTStatus]" value=true/> Yes
-                    <input id="graduateFTStatus-input" type="radio" name="application[graduateFTStatus]" value=false/> No
-                </div>
-
-                <div class="form-group">
-                    <label for="previousUTAPosition-input">Have you held a previous UTA position at UBC O?</label>
-                    <input id="previousUTAPosition-input" type="radio" name="application[previousUTAPosition]" value=true/> Yes
-                    <input id="previousUTAPosition-input" type="radio" name="application[previousUTAPosition]" value=false/> No
-                </div>
-
-                <div class="form-group">
-                		<label>Number of hours per week (minimum 2; maximum 12):</label>
-		                    <label for="preferredHours-input">Preferred Hours</label>
-		                    <input id="preferredHours-input" type="number" name="application[preferredHours]" min="2" max="12" step="1"/>
-
-		                    <label for="maximumHours-input">Maximum Hours</label>
-		                    <input id="maximumHours-input" type="number" name="application[maximumHours]" min="2" max="12" step="1"/>
-		                </div>
-		            </div>
-
-                <button class="btn btn-default" type="submit">Submit Application</button>
+            <%= render(partial: "form", locals: { application: nil }) %>
             </form>
         </div>
     </div>
