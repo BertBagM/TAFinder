@@ -7,7 +7,13 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    @applications = Application.create(application_params())
+    if @applications = Application.create(application_params())
+      flash[:success] = "Your application has been submitted."
+    else
+      flash[:danger] = "Unable to create application."
+    end
+
+    render(action: :new)
   end
 
   def new
