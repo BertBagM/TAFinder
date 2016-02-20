@@ -4,6 +4,11 @@ class ApplicationsController < ApplicationController
 
   def index
     @applications = Application.all
+    respond_to do |format|
+      format.html
+      format.csv { render text: @applications.to_csv }
+      format.xls
+    end
   end
 
   def create
