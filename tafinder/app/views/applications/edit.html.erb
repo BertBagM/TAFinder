@@ -1,12 +1,16 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
+            <h1>Edit Application <%= @application.id %></h1>
+        </div>
+    </div>
 
-            <form accept-charset="UTF-8" action="<%= application_path %>" method="post">
+    <div class="row">
+        <div class="col-xs-12">
+            <form accept-charset="UTF-8" action="<%= update_application_path %>" method="post">
                 <input name="_method" type="hidden" value="patch" />
-
+                <%= render(partial: "form", locals: { application: @application }) %>
             </form>
-
         </div>
     </div>
 </div>

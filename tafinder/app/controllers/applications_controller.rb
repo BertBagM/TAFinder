@@ -22,11 +22,21 @@ class ApplicationsController < ApplicationController
   def edit
     @application = Application.find_by_id(params[:id])
 
-    flash[:warning] = "No applications were found with ID #{params[:id]}."
-    redirect_to(action: :index) unless @application.present?
+    if @application.nil?
+      flash[:warning] = "No applications were found with ID #{params[:id]}."
+      redirect_to(action: :index)
+    end
   end
 
   def update
+    @application = Application.find(params[:id])
+
+    if @application.update_attributes(application_params)
+      redirect_to(action: :index)
+    else
+      flash[:danger] = "Unable to modify application."
+      render(action: :edit)
+    end
   end
 
   private
