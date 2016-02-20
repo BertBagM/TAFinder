@@ -4,17 +4,17 @@ Rails.application.routes.draw do
 
   root 'applications#new'
 
-  get 'applications/new' => 'applications#new'
-  post 'applications' => 'applications#create'
+  get 'applications/new', to: 'applications#new', as: 'new_application'
+  post 'applications', to: 'applications#create'
 
   scope :admin do
-    get 'login' => 'sessions#new'
-    post 'login' => 'sessions#create'
-    post 'logout' => 'sessions#destroy'
+    get 'login', to: 'sessions#new', as: 'login'
+    post 'login', to: 'sessions#create'
+    post 'logout', to: 'sessions#destroy', as: 'logout'
 
-    get 'applications' => 'applications#index'
+    get 'applications', to: 'applications#index', as: 'applications_index'
 
-    get 'courses' => 'courses#index'
+    get 'courses', to: 'courses#index', as: 'courses_index'
   end
 
   # You can have the root of your site routed with "root"
