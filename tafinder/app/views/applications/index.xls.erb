@@ -1,0 +1,50 @@
+<table border="1">
+  <tr>
+    <th>Student Number</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>GPA</th>
+    <th>Faculty</th>
+    <th>Year of Study</th>
+    <th>Graduate Student</th>
+    <th>UBC Employee Id</th>
+    <th>Program</th>
+    <th>Gender</th>
+    <th>Street Address</th>
+    <th>City</th>
+    <th>Postal Code</th>
+    <th>Home Phone</th>
+    <th>Cell Phone</th>
+    <th>Full Time Graduate Student</th>
+    <th>Held Previous UTA Position</th>
+    <th>Preferred Hours</th>
+    <th>Maximum Hours</th>
+    <th>Application Submit Date</th>
+  </tr>
+  <% @applications.each do |application| %>
+  <tr>
+    <td><%= application.studentNum %></td>
+    <td><%= application.firstName %></td>
+    <td><%= application.lastName %></td>
+    <td><%= application.email %></td>
+    <td><%= application.GPA %></td>
+    <td><%= application.faculty %></td>
+    <td><%= application.yearOfStudy %></td>
+    <td><%= application.graduateStudent %></td>
+    <td><%= application.ubcEmployeeId %></td>
+    <td><%= application.program %></td>
+    <td><%= application.gender %></td>
+    <td><%= application.streetAddress %></td>
+    <td><%= application.city %></td>
+    <td><%= application.postalCode %></td>
+    <td><%= application.homePhone %></td>
+    <td><%= application.cellPhone %></td>
+    <td><%= application.graduateFTStatus %></td>
+    <td><%= application.previousUTAPosition %></td>
+    <td><%= application.preferredHours %></td>
+    <td><%= application.maximumHours %></td>
+    <td><%= application.created_at %></td>
+  </tr>
+  <% end %>
+</table>
