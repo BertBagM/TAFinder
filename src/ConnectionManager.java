@@ -1,12 +1,5 @@
-import java.util.HashMap;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
-import org.json.simple.parser.JSONParser;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,7 +17,7 @@ public class ConnectionManager
 		String uid = "bmclaren";
 		String pw = "56301147";
 
-		System.out.println("Connecting to database.");
+		//System.out.println("Connecting to database.");
 		try {
 			connection = DriverManager.getConnection(url, uid, pw);
 

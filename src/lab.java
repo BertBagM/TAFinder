@@ -1,32 +1,50 @@
-public class lab {
+public class Lab {
 
 	String instructor;
 	String subject;
-	String courseNo;		
+	int courseNo;
+	String cD = " ";
 	String secNo;
 	int term;
-	String activity;	
+	String activity;
 	String days;
-	double startTime ;	
-	double endTime	; // might be weird / time
-			
+	String startTime;
+	String endTime; // might be weird / time
 
+	String taFirst = "first Name";
+	String taLast = "last Name";
 
-	public lab(String instructor,String subject,String courseNo, String secNo, int term, String activity, String days, double startTime ,double endTime) {
-	
+	String cM = " ";
+	String cN = " ";
+	String cO = " ";
+
+	String taEducation = "G";// education
+
+	int hours;
+	int cR = 0;
+	int cS = 0;
+	int cT = 0;
+	String cU = " ";
+	int cV = 0;
+	int cW = 0;
+
+	public Lab(String instructor, String subject, int courseNo, String secNo, int term, String activity, String days,
+			int hours, String startTime, String endTime) {
+
 		this.instructor = instructor;
 		this.subject = subject;
-		this.courseNo = courseNo;		
-		this.secNo= secNo;
+		this.courseNo = courseNo;
+		this.secNo = secNo;
 		this.term = term;
-		this.activity = activity;	
+		this.activity = activity;
 		this.days = days;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.hours = hours;
 
 	}
 
-	public lab() {
+	public Lab() {
 		// TODO Auto-generated constructor stub
 	}
 

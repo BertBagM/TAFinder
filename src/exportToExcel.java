@@ -2,6 +2,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -10,33 +14,115 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.simple.parser.ParseException;
+
+/*
+ * 
+ * This program takes a previous excel workbook, takes all the cell data one by one
+ * creates lab objects with TA names and exports back out to another excel workbook
+ * 
+ * 
+ */
 
 public class exportToExcel {
 
-	ArrayList<teachingAssistant> TAList = new ArrayList<teachingAssistant>();
+	static ArrayList<teachingAssistant> TAList = new ArrayList<teachingAssistant>();
 	static ArrayList<Lab> labInfoList = new ArrayList<Lab>();
 	static String inFile = "COSC 310 - Term 2 Course  and TA spreadsheet.xlsx";
 	static String outFile = "TA spreadsheet.xlsx";
-	static String headers = "Instructor Name	Subject	Course		Sec No	Term	Act Type	Days Met	Start Time	End time	TA Name		Hours per week			U/G		Est. Enrol	Release	Enrolment	Building	Room	Cap";
+
+	static Connection con;
 
 	public static void main(String[] args) {
 
 		ImportLabDataIntoArrayLists(inFile);
-
-		// assignTAtoLab();
-
+		openSqlConnection();
+		pullTAinfo();
+		assignTAtoLab();
 		ExportDataToExcel(outFile);
 
 	}
 
+	private static void openSqlConnection() {
+
+		try {
+			con = ConnectionManager.open();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private static void pullTAinfo() {
+		String sql = "Select* from teachingAssistant";
+		PreparedStatement pstmt = null;
+		ResultSet rst = null;
+		try {
+			pstmt = con.prepareStatement(sql);
+			rst = pstmt.executeQuery();
+			while (rst.next()) {
+
+				teachingAssistant newTa = new teachingAssistant();
+				newTa.studentNum = rst.getInt(1);
+				newTa.firstName = rst.getString(2);
+				newTa.lastName = rst.getString(3);
+				newTa.education = rst.getString(4);
+				newTa.hours = rst.getShort(5);
+
+				TAList.add(newTa);
+
+			}
+			
+			
+
+		} catch (
+
+		Exception e)
+
+		{
+			e.printStackTrace();
+		}
+
+		System.out.print("Pulling TA data");
+
+	}
+
+	private static void assignTAtoLab() {
+
+		for (Lab L : labInfoList) {
+			getbestMatch(L);
+		}
+
+		
+		labInfoList.get(11).taFirst = "Paul";
+		labInfoList.get(11).taLast = "Myhr";
+	}
+
 	/*
-	 * private static void assignTAtoLab() {
+	 * this is just to demonstate the format needed for the exporter l.taFirst =
+	 * T.first(); l.taLast = T.Last; l.taEducation = " "; T.hours = T.hours -
+	 * l.hours
+	 */
+	private static void getbestMatch(Lab l) {
+
+		// SOME ALGORITHM
+
+		l.taFirst = "first";
+		l.taLast = "last";
+		l.taEducation = "G";
+
+	}
+
+	/*
+	 * Creates an arrayList of all releveant lab data
+	 *
 	 * 
-	 * 
-	 * }
 	 * 
 	 */
-
 	private static void ImportLabDataIntoArrayLists(String fileName) {
 		FileInputStream fis = null;
 		try {
@@ -139,6 +225,14 @@ public class exportToExcel {
 
 					} else if (cell.getColumnIndex() == 12) {
 
+						labInfo.taFirst = cell.getStringCellValue();
+
+					} else if (cell.getColumnIndex() == 11) {
+
+						labInfo.taFirst= cell.getStringCellValue();
+
+					} else if (cell.getColumnIndex() == 12) {
+
 						labInfo.cM = cell.getStringCellValue();
 
 					} else if (cell.getColumnIndex() == 13) {
@@ -220,8 +314,13 @@ public class exportToExcel {
 		System.out.println("Excel Data Imported");
 
 	}
+	/*
+	 * 
+	 * iterates through ever lab object and writes all relevant data into an
+	 * excel workbook to be used by Ashlee
+	 * 
+	 */
 
-	@SuppressWarnings("resource")
 	private static void ExportDataToExcel(String outFile) {
 		Workbook workbook = new XSSFWorkbook();
 		try {
@@ -261,12 +360,10 @@ public class exportToExcel {
 
 		try {
 			FileOutputStream fos = new FileOutputStream(outFile);
-
 			workbook.write(fos);
-
 			fos.close();
-
-			System.out.println(outFile + " is successfully written");
+			workbook.close();
+			System.out.println("\n" +outFile + " is successfully written");
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
@@ -274,6 +371,5 @@ public class exportToExcel {
 
 			e.printStackTrace();
 		}
-
 	}
 }
