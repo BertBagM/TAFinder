@@ -44,6 +44,18 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def destroy
+    @application = Application.find(params[:id])
+
+    if @application.destroy()
+      flash[:success] = "The application has been removed."
+    else
+      flash[:danger] = "Unable to remove the application."
+    end
+
+    redirect_to(action: :index)
+  end
+
   private
 
   def application_params

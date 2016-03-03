@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get 'applications/:id/edit', to: 'applications#edit', as: 'edit_application'
     patch 'applications/:id', to: 'applications#update', as: 'update_application'
     put 'applications/:id', to: 'applications#update'
+    delete 'applications/:id', to: 'applications#destroy', as: 'delete_application'
 
     get 'courses', to: 'courses#index', as: 'courses'
   end
