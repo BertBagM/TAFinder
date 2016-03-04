@@ -14,4 +14,7 @@ class Application < ActiveRecord::Base
 	    end
 	  end
 
+  def full_name
+    "#{firstName} #{lastName}"
+  end
 end
