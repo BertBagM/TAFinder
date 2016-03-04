@@ -1,5 +1,5 @@
 class ApplicationsController < ApplicationController
-  before_action :validate_logged_in, except: [:create, :new]
+  before_action :validate_logged_in, except: [:create, :new, :delete, :request_revoke]
 
 
   def index
@@ -42,6 +42,24 @@ class ApplicationsController < ApplicationController
       flash[:danger] = "Unable to modify application."
       render(action: :edit)
     end
+  end
+
+  def delete
+  end
+
+  def request_revoke
+    # TODO(scott): we also need to find_by year and semester
+    @application = Application.find_by(email: application_params[:email])
+
+    if @application.present?
+      flash[:success] = "An email has been sent requesting for your application to be revoked."
+
+      UserMailer.revoke_application_request_email(@application).deliver
+    else
+      flash[:danger] = "Could not find an application associated with that email."
+    end
+
+    redirect_to(action: :delete)
   end
 
   def destroy

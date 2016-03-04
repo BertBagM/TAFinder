@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get 'applications/new', to: 'applications#new', as: 'new_application'
   post 'applications', to: 'applications#create', as: 'create_application'
+  get 'applications/revoke', to: 'applications#delete', as: 'delete_application'
+  post 'applications/revoke', to: 'applications#request_revoke'
 
   scope :admin do
     get 'login', to: 'sessions#new', as: 'login'
@@ -16,7 +18,7 @@ Rails.application.routes.draw do
     get 'applications/:id/edit', to: 'applications#edit', as: 'edit_application'
     patch 'applications/:id', to: 'applications#update', as: 'update_application'
     put 'applications/:id', to: 'applications#update'
-    delete 'applications/:id', to: 'applications#destroy', as: 'delete_application'
+    delete 'applications/:id', to: 'applications#destroy', as: 'destroy_application'
 
     get 'courses', to: 'courses#index', as: 'courses'
   end

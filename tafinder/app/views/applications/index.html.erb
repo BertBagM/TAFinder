@@ -36,7 +36,7 @@
                     <td><%= application.GPA %></td>
                     <td>
                         <a href="<%= edit_application_path(application) %>" class="glyphicon glyphicon-pencil"></a>
-                        <a href="<%= delete_application_path(application) %>" class="glyphicon glyphicon-trash" rel="nofollow" data-method="delete"></a>
+                        <a href="<%= destroy_application_path(application) %>" class="glyphicon glyphicon-trash" rel="nofollow" data-method="delete"></a>
                     </td>
                 </tr>
                 <% end %>
