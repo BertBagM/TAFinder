@@ -24,26 +24,26 @@
   </tr>
   <% @applications.each do |application| %>
   <tr>
-    <td><%= application.studentNum %></td>
-    <td><%= application.firstName %></td>
-    <td><%= application.lastName %></td>
+    <td><%= application.student_id %></td>
+    <td><%= application.first_name %></td>
+    <td><%= application.last_name %></td>
     <td><%= application.email %></td>
-    <td><%= application.GPA %></td>
+    <td><%= application.gpa %></td>
     <td><%= application.faculty %></td>
-    <td><%= application.yearOfStudy %></td>
-    <td><%= application.graduateStudent %></td>
-    <td><%= application.ubcEmployeeId %></td>
+    <td><%= application.study_year %></td>
+    <td><%= application.graduate %></td>
+    <td><%= application.ubc_employee_id %></td>
     <td><%= application.program %></td>
     <td><%= application.gender %></td>
-    <td><%= application.streetAddress %></td>
+    <td><%= application.street %></td>
     <td><%= application.city %></td>
-    <td><%= application.postalCode %></td>
-    <td><%= application.homePhone %></td>
-    <td><%= application.cellPhone %></td>
-    <td><%= application.graduateFTStatus %></td>
-    <td><%= application.previousUTAPosition %></td>
-    <td><%= application.preferredHours %></td>
-    <td><%= application.maximumHours %></td>
+    <td><%= application.postal_code %></td>
+    <td><%= application.home_phone %></td>
+    <td><%= application.cell_phone %></td>
+    <td><%= application.graduate_full_time %></td>
+    <td><%= application.previous_ta %></td>
+    <td><%= application.preferred_hours %></td>
+    <td><%= application.maximum_hours %></td>
     <td><%= application.created_at %></td>
   </tr>
   <% end %>
