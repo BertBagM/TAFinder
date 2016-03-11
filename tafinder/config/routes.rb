@@ -21,6 +21,13 @@ Rails.application.routes.draw do
     delete 'applications/:id', to: 'applications#destroy', as: 'destroy_application'
 
     get 'courses', to: 'courses#index', as: 'courses'
+
+    get 'terms', to: 'terms#index', as: 'terms'
+    post 'terms', to: 'terms#create', as: 'create_term'
+    patch 'terms/:id/open', to: 'terms#open', as: 'open_term'
+    put 'terms/:id/open', to: 'terms#open'
+    patch 'terms/:id/close', to: 'terms#close', as: 'close_term'
+    put 'terms/:id/close', to: 'terms#close'
   end
 
   # You can have the root of your site routed with "root"

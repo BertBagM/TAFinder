@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  application_id: 1
+  term_id: 1
+  position: 1
+  locked: false
+
+two:
+  application_id: 1
+  term_id: 1
+  position: 1
+  locked: false

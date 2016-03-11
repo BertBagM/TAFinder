@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <form class="form-inline" accept-charset="UTF-8" action="<%= terms_path %>" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+
+                <div class="form-group">
+                    <label for="term-year-input">Year</label>
+                    <input id="term-year-input" class="form-control" name="term[year]" />
+                </div>
+
+                <div class="form-group">
+                    <label form="term-semester-input">Semester</label>
+                    <select id="term-semester-input" class="form-control" name="term[semester]">
+                        <option value="F">Fall</option>
+                        <option value="W">Winter</option>
+                        <option value="S">Summer</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-default" type="submit">Add Term</button>
+            </form>
+
+            <% if (!@terms.empty?) %>
+
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>Year</th>
+                    <th>Semester</th>
+                    <th></th>
+                </tr>
+
+                <% @terms.each do |term| %>
+                <tr>
+                    <td><%= term.year %></td>
+                    <td><%= term.semester %></td>
+                    <td>
+                        <form class="form-inline" accept-charset="UTF-8" action="<%= terms_path %>" method="post">
+                            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+
+                            <div class="form-group">
+                                <label form="term-semester-input">Semester</label>
+                                <select id="term-semester-input" class="form-control" name="term[semester]">
+                                    <option value="F">Fall</option>
+                                    <option value="W">Winter</option>
+                                    <option value="S">Summer</option>
+                                </select>
+                            </div>
+
+                            <button class="btn btn-default" type="submit">Set Status</button>
+                        </form>
+                        
+                        <% if (term.open?) %>
+                        <a href="<%= close_term_path(term) %>">Close</a>
+                        <% else %>
+                        <a href="<%= open_term_path(term) %>">Open</a>
+                        <% end %>
+                    </td>
+                </tr>
+                <% end %>
+            </table>
+
+        <% end %>
+        </div>
+    </div>
+</div>
