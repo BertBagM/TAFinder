@@ -1,6 +1,17 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
+            <form class="form-inline" accept-charset="UTF-8" action="<%= import_courses_path %>" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+
+                <div class="form-group">
+                    <label for="import-course-input">File</label>
+                    <input id="import-course-input" type="file" name="course_file" />
+                </div>
+
+                <button class="btn btn-default" type="submit">Upload File</button>
+            </form>
+
             <% if (@courses.empty?) %>
 
             <div class="well well-lg text-center">
