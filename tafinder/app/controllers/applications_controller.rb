@@ -9,9 +9,9 @@ class ApplicationsController < ApplicationController
     if (params[:q].present?)
       query = "%#{params["q"]}%"
       @applications = Application.where(
-        "studentNum LIKE ? OR "\
-        "firstName LIKE ? OR "\
-        "lastName LIKE ? OR "\
+        "student_id LIKE ? OR "\
+        "first_name LIKE ? OR "\
+        "last_name LIKE ? OR "\
         "email LIKE ?",
       query, query, query, query)
     else
@@ -23,7 +23,7 @@ class ApplicationsController < ApplicationController
     end
 
     if (params[:filter_grad] == "on")
-      @applications = @applications.where(graduateStudent: true)
+      @applications = @applications.where(graduate: true)
     end
 
     if (validate_param(params[:order], order_params))
@@ -105,66 +105,39 @@ class ApplicationsController < ApplicationController
 
   def application_params
     params.require(:application).permit(
-      :studentNum,
-      :firstName,
-      :lastName,
+      :student_id,
+      :first_name,
+      :last_name,
       :email,
-      :GPA,
+      :gpa,
       :faculty,
-      :yearOfStudy,
-      :graduateStudent,
-      :ubcEmployeeId,
+      :study_year,
+      :graduate,
+      :graduate_full_time,
+      :ubc_employee_id,
       :program,
       :gender,
-      :streetAddress,
+      :street,
       :city,
-      :postalCode,
-      :homePhone,
-      :cellPhone,
-      :graduateFTStatus,
-      :previousUTAPosition,
-      :preferredHours,
-      :maximumHours
-    )
-  end
-
-  private
-
-  def application_params
-    params.require(:application).permit(
-      :studentNum,
-      :firstName,
-      :lastName,
-      :email,
-      :GPA,
-      :faculty,
-      :yearOfStudy,
-      :graduateStudent,
-      :ubcEmployeeId,
-      :program,
-      :gender,
-      :streetAddress,
-      :city,
-      :postalCode,
-      :homePhone,
-      :cellPhone,
-      :graduateFTStatus,
-      :previousUTAPosition,
-      :preferredHours,
-      :maximumHours
+      :postal_code,
+      :home_phone,
+      :cell_phone,
+      :previous_ta,
+      :preferred_hours,
+      :maximum_hours
     )
   end
 
   def order_params
     {
       created_at: "Date Created",
-      studentNum: "Student Number",
-      firstName: "First Name",
-      lastName: "Last Name",
+      student_id: "Student Number",
+      first_name: "First Name",
+      last_name: "Last Name",
       email: "Email",
-      GPA: "GPA",
+      gpa: "GPA",
       faculty: "Faculty",
-      yearOfStudy: "Year of Study"
+      study_year: "Year of Study"
     }
   end
 

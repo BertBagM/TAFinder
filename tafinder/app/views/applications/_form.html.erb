@@ -1,18 +1,18 @@
 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
 
 <div class="form-group">
-    <label for="firstName-input">First Name</label>
-    <input id="firstName-input" type="text" name="application[firstName]" value="<%= application.firstName if application.present? %>" />
+    <label for="first-name-input">First Name</label>
+    <input id="first-name-input" type="text" name="application[first_name]" value="<%= application.first_name if application.present? %>" />
 </div>
 
 <div class="form-group">
-    <label for="lastName-input">Last Name</label>
-    <input id="lastName-input" type="text" name="application[lastName]" value="<%= application.lastName if application.present? %>" />
+    <label for="last-name-input">Last Name</label>
+    <input id="last-name-input" type="text" name="application[last_name]" value="<%= application.last_name if application.present? %>" />
 </div>
 
 <div class="form-group">
-    <label for="studentNum-input">Student #</label>
-    <input id="studentNum-input" type="text" name="application[studentNum]" value="<%= application.studentNum if application.present? %>" />
+    <label for="student-id-input">Student #</label>
+    <input id="student-id-input" type="text" name="application[student_id]" value="<%= application.student_id if application.present? %>" />
 </div>
 
 <div class="form-group">
@@ -21,18 +21,18 @@
 </div>
 
 <div class="form-group">
-    <label for="yearOfStudy-input">Year of Studies in 2015/16</label>
-    <input id="yearOfStudy-input" type="number" name="application[yearOfStudy]" min="1" step="1" value="<%= application.yearOfStudy if application.present? %>" />
+    <label for="study-year-input">Year of Studies in 2015/16</label>
+    <input id="study-year-input" type="number" name="application[study_year]" min="1" step="1" value="<%= application.study_year if application.present? %>" />
 </div>
 
 <div class="form-group">
-    <label for="GPA-input">Current GPA</label>
-    <input id="GPA-input" type="number" name="application[GPA]" min="0" value="<%= application.GPA if application.present? %>" />
+    <label for="gpa-input">Current GPA</label>
+    <input id="gpa-input" type="number" name="application[gpa]" min="0" value="<%= application.gpa if application.present? %>" />
 </div>
 
 <div class="form-group">
-    <label for="ubcEmployeeId-input">UBC Employee ID</label>
-    <input id="ubcEmployeeId-input" type="text" name="application[ubcEmployeeId]" value="<%= application.ubcEmployeeId if application.present? %>" />
+    <label for="ubc-employee-id-input">UBC Employee ID</label>
+    <input id="ubc-employee-id-input" type="text" name="application[ubc_employee_id]" value="<%= application.ubc_employee_id if application.present? %>" />
 </div>
 
 <div class="form-group">
@@ -52,8 +52,8 @@
 </div>
 
 <div class="form-group">
-    <label for="streetAddress-input">Current Address</label>
-    <input id="streetAddress-input" type="text" name="application[streetAddress]" value="<%= application.streetAddress if application.present? %>" />
+    <label for="street-input">Current Address</label>
+    <input id="street-input" type="text" name="application[street]" value="<%= application.street if application.present? %>" />
 </div>
 
 <div class="form-group">
@@ -62,39 +62,39 @@
 </div>
 
 <div class="form-group">
-    <label for="postalCode-input">Postal Code</label>
-    <input id="postalCode-input" type="text" name="application[postalCode]" value="<%= application.postalCode if application.present? %>" />
+    <label for="postal-code-input">Postal Code</label>
+    <input id="postal-code-input" type="text" name="application[postal_code]" value="<%= application.postal_code if application.present? %>" />
 </div>
 
 <div class="form-group">
-    <label for="homePhone-input">Telephone # (Home)</label>
-    <input id="homePhone-input" type="text" name="application[homePhone]" value="<%= application.homePhone if application.present? %>" />
+    <label for="home-phone-input">Telephone # (Home)</label>
+    <input id="home-phone-input" type="text" name="application[home_phone]" value="<%= application.home_phone if application.present? %>" />
 </div>
 
 <div class="form-group">
-    <label for="cellPhone-input">Telephone # (Cell)</label>
-    <input id="cellPhone-input" type="text" name="application[cellPhone]" value="<%= application.cellPhone if application.present? %>" />
+    <label for="cell-phone-input">Telephone # (Cell)</label>
+    <input id="cell-phone-input" type="text" name="application[cell_phone]" value="<%= application.cell_phone if application.present? %>" />
 </div>
 
 <div class="form-group">
-    <label for="graduateFTStatus-input">Will you be a full-time graduate student in Winter 2015/16?</label>
-    <input id="graduateFTStatus-input" type="radio" name="application[graduateFTStatus]" value="true" <%= "checked" if application.present? && application.graduateFTStatus %> /> Yes
-    <input id="graduateFTStatus-input" type="radio" name="application[graduateFTStatus]" value="false" <%= "checked" if application.present? && !application.graduateFTStatus %> /> No
+    <label for="graduate-full-time-input">Will you be a full-time graduate student in Winter 2015/16?</label>
+    <input id="graduate-full-time-input" type="radio" name="application[graduate_full_time]" value="true" <%= "checked" if application.present? && application.graduate_full_time %> /> Yes
+    <input id="graduate-full-time-input" type="radio" name="application[graduate_full_time]" value="false" <%= "checked" if application.present? && !application.graduate_full_time %> /> No
 </div>
 
 <div class="form-group">
-    <label for="previousUTAPosition-input">Have you held a previous UTA position at UBC O?</label>
-    <input id="previousUTAPosition-input" type="radio" name="application[previousUTAPosition]" value="true" <%= "checked" if application.present? && application.previousUTAPosition %> /> Yes
-    <input id="previousUTAPosition-input" type="radio" name="application[previousUTAPosition]" value="false" <%= "checked" if application.present? && !application.previousUTAPosition %> /> No
+    <label for="previous-ta-input">Have you held a previous UTA position at UBC O?</label>
+    <input id="previous-ta-input" type="radio" name="application[previous_ta]" value="true" <%= "checked" if application.present? && application.previous_ta %> /> Yes
+    <input id="previous-ta-input" type="radio" name="application[previous_ta]" value="false" <%= "checked" if application.present? && !application.previous_ta %> /> No
 </div>
 
 <div class="form-group">
     <label>Number of hours per week (minimum 2; maximum 12):</label>
-    <label for="preferredHours-input">Preferred Hours</label>
-    <input id="preferredHours-input" type="number" name="application[preferredHours]" min="2" max="12" step="1" value="<%= application.preferredHours if application.present? %>" />
+    <label for="preferred-hours-input">Preferred Hours</label>
+    <input id="preferred-hours-input" type="number" name="application[preferred_hours]" min="2" max="12" step="1" value="<%= application.preferred_hours if application.present? %>" />
 
-    <label for="maximumHours-input">Maximum Hours</label>
-    <input id="maximumHours-input" type="number" name="application[maximumHours]" min="2" max="12" step="1" value="<%= application.maximumHours if application.present? %>" />
+    <label for="maximum-hours-input">Maximum Hours</label>
+    <input id="maximum-hours-input" type="number" name="application[maximum_hours]" min="2" max="12" step="1" value="<%= application.maximum_hours if application.present? %>" />
 </div>
 
 <button class="btn btn-default" type="submit">Submit Application</button>

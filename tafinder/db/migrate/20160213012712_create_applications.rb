@@ -1,28 +1,30 @@
 class CreateApplications < ActiveRecord::Migration
+
   def change
     create_table :applications do |t|
-    	t.integer	:studentNum
-    	t.string	:firstName
-    	t.string	:lastName
-    	t.string	:email
-    	t.decimal :GPA
-    	t.string	:faculty
-    	t.integer	:yearOfStudy
-    	t.boolean	:graduateStudent
-    	t.integer	:ubcEmployeeId
-    	t.string	:program
-    	t.string	:gender
-    	t.string	:streetAddress
-    	t.string	:city
-    	t.string	:postalCode
-    	t.string	:homePhone
-    	t.string	:cellPhone
-    	t.boolean	:graduateFTStatus
-    	t.boolean	:previousUTAPosition
-    	t.integer	:preferredHours
-    	t.integer	:maximumHours
+      t.integer   :student_id, null: false
+      t.string    :first_name, null: false
+      t.string    :last_name, null: false
+      t.string    :email, null: false
+      t.decimal   :gpa, precision: 5, scale: 2
+      t.string    :faculty, null: false
+      t.integer   :study_year, default: 1, null: false
+      t.boolean   :graduate, default: false, null: false
+      t.boolean   :graduate_full_time, default: false, null: false
+      t.integer   :ubc_employee_id
+      t.string    :program
+      t.string    :gender, null: false
+      t.string    :street, null: false
+      t.string    :city, null: false
+      t.string    :postal_code, null: false
+      t.string    :home_phone, limit: 14
+      t.string    :cell_phone, limit: 14
+      t.boolean   :previous_ta, default: false, null: false
+      t.integer   :preferred_hours, default: 12, null: false
+      t.integer   :maximum_hours, default: 12, null: false
 
       t.timestamps null: false
     end
   end
+
 end
