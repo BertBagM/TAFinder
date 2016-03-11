@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     get 'courses', to: 'courses#index', as: 'courses'
     post 'courses/import', to: 'courses#import', as: 'import_courses'
 
+   # get 'courses/export', to: 'courses#export', as: 'export_courses'
+
     get 'terms', to: 'terms#index', as: 'terms'
     post 'terms', to: 'terms#create', as: 'create_term'
     patch 'terms/:id/open', to: 'terms#open', as: 'open_term'

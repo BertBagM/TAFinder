@@ -12,6 +12,8 @@
                 <button class="btn btn-default" type="submit">Upload File</button>
             </form>
 
+          <a href = "<%=courses_path(format: "xls" )%>" class = "btn btn-default">Export</a>
+
             <% if (@courses.empty?) %>
 
             <div class="well well-lg text-center">

@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1><b>Application for</b><br/> Undergraduate/Graduate Teaching <br/>Assistantship</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <form accept-charset="UTF-8" action="<%= create_application_path %>" method="post">
+            <%= render(partial: "form", locals: { application: nil }) %>
+            </form>
+        </div>
+    </div>
+</div>

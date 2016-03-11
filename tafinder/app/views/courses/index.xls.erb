@@ -1,0 +1,80 @@
+<table border="1">
+  <tr> # excel headers
+    <th>Instructor Name</th>
+    <th>Subject</th>
+    <th>Course</th>
+    <th></th>
+    <th>Sec No</th>
+    <th>Term</th>
+    <th>Act Type</th>
+    <th>Days Met</th>
+    <th>Start Time</th>
+    <th>End time</th>
+    <th>TA Name</th>
+    <th></th>
+    <th>Hours per week</th>
+    <th></th>
+    <th></th>
+    <th>U/G</th>
+    <th></th>
+    <th>Est. Enrol</th>
+    <th>Release</th>
+    <th>Enrolment</th>
+    <th>Building</th>
+    <th>Room</th>
+    <th>Cap</th>
+  </tr>
+
+  <tr> # excel headers to match Ashlee
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>Last</th>
+    <th>First</th>
+    <th>Labs</th>
+    <th>Marking</th>
+    <th>Coord</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @courses.each do |course| %>
+      <tr> # attributes
+        <td><%= course.name %></td>
+        <td><%= course.subject %></td>
+        <td><%= course.course %></td>
+        <th></th>
+        <td><%= course.section %></td>
+        <td><%= course.term %></td>
+        <td><%= course.act_type %></td>
+        <td><%= course.days %></td>
+        <td><%= course.start_time %></td>
+        <td><%= course.end_time %></td>
+        <th>Last</th>
+        <th>First</th>
+        <td><%= course.lab %></td>
+        <td><%= course.mark %></td>
+        <td><%= course.coord %></td>
+        <td><%= course.graduate %></td>
+        <th></th>
+        <td><%= course.enrolled_est %></td>
+        <td><%= course.release %></td>
+        <td><%= course.enrolled %></td>
+        <td><%= course.building %></td>
+        <td><%= course.room %></td>
+        <td><%= course.cap %></td>
+      </tr>
+  <% end %>
+</table>
