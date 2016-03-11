@@ -3,7 +3,34 @@ class ApplicationsController < ApplicationController
 
 
   def index
-    @applications = Application.all
+    @order_options = order_params()
+    @order_dir_options = order_dir_params()
+
+    if (params[:q].present?)
+      query = "%#{params["q"]}%"
+      @applications = Application.where(
+        "studentNum LIKE ? OR "\
+        "firstName LIKE ? OR "\
+        "lastName LIKE ? OR "\
+        "email LIKE ?",
+      query, query, query, query)
+    else
+      @applications = Application.all
+    end
+
+    if (params[:filter_term] == "on")
+      #TODO: filter current term here
+    end
+
+    if (params[:filter_grad] == "on")
+      @applications = @applications.where(graduateStudent: true)
+    end
+
+    if (validate_param(params[:order], order_params))
+      order_dir = validate_param(params[:order_dir], order_dir_params) ? params[:order_dir] : :asc
+      @applications = @applications.order(params[:order], order_dir)
+    end
+
     respond_to do |format|
       format.html
       format.csv { render text: @applications.to_csv }
@@ -126,6 +153,30 @@ class ApplicationsController < ApplicationController
       :preferredHours,
       :maximumHours
     )
+  end
+
+  def order_params
+    {
+      created_at: "Date Created",
+      studentNum: "Student Number",
+      firstName: "First Name",
+      lastName: "Last Name",
+      email: "Email",
+      GPA: "GPA",
+      faculty: "Faculty",
+      yearOfStudy: "Year of Study"
+    }
+  end
+
+  def order_dir_params
+    {
+      asc: "Ascending",
+      desc: "Descending"
+    }
+  end
+
+  def validate_param(param, valid_params)
+    valid_params.keys().include?(param)
   end
 
 end
