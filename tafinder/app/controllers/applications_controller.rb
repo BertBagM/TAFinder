@@ -1,5 +1,6 @@
 class ApplicationsController < ApplicationController
   before_action :validate_logged_in, except: [:create, :new, :delete, :request_revoke]
+  before_action :sanatize_params
 
 
   def index
@@ -39,20 +40,25 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    if @applications = Application.create(application_params())
-      flash[:success] = "Your application has been submitted."
+    byebug
+    application = Application.create(application_params)
+
+    if (application.valid?)
+      flash[:success] = "Your application has been submitted"
     else
-      flash[:danger] = "Unable to create application."
+      flash[:danger] = application.errors.full_messages.first
     end
 
-    render(action: :new)
+    redirect_to(action: :new)
   end
 
   def new
+    @term_options = Term.where(open: true)
   end
 
   def edit
     @application = Application.find_by_id(params[:id])
+    @term_options = Term.all
 
     if @application.nil?
       flash[:warning] = "No applications were found with ID #{params[:id]}."
@@ -124,8 +130,14 @@ class ApplicationsController < ApplicationController
       :cell_phone,
       :previous_ta,
       :preferred_hours,
-      :maximum_hours
+      :maximum_hours,
+      :terms
     )
+  end
+
+  def sanatize_params
+    params[:application][:cell_phone] = format_phone_number(application_params[:cell_phone])
+    params[:application][:home_phone] = format_phone_number(application_params[:home_phone])
   end
 
   def order_params

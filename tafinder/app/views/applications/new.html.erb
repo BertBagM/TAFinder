@@ -7,9 +7,19 @@
 
     <div class="row">
         <div class="col-xs-12">
+            <% if (@term_options.present?) %>
+
             <form accept-charset="UTF-8" action="<%= create_application_path %>" method="post">
-            <%= render(partial: "form", locals: { application: nil }) %>
+            <%= render(partial: "form", locals: { application: nil, term_options: @term_options }) %>
             </form>
+
+            <% else %>
+
+            <div class="well well-lg text-center">
+                <h4>Applications are not open at the moment. Please check back soon.</h4>
+            </div>
+
+            <% end %>
         </div>
     </div>
 </div>
