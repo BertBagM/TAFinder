@@ -1,35 +1,31 @@
 class TermsController < ApplicationController
+
   def index
     @terms = Term.all
+    @semester_options = Term.semesters
   end
 
   def create
-    Term.create(term_params)
+    term = Term.create(term_params)
 
-    redirect_to(action: :index)
-  end
-
-  def open
-    term = Term.find(params[:id])
-    term.open = true
-
-    if (term.save())
-      flash[:success] = "Term #{term.to_s} has been opened."
-    else
-      flash[:error] = "Failed to open term #{term.to_s}."
+    if (!term.valid?)
+      flash[:danger] = term.errors.full_messages.first
     end
 
     redirect_to(action: :index)
   end
 
-  def close
+  def update
     term = Term.find(params[:id])
-    term.open = false
 
-    if (term.save())
-      flash[:success] = "Term #{term.to_s} has been closed."
-    else
-      flash[:error] = "Failed to close term #{term.to_s}."
+    if (term.present? && term_params[:open].present?)
+      term.open = term_params[:open]
+
+      if (term.save())
+        flash[:success] = "Term #{term.to_s} has been #{term_params[:open] ? "opened" : "closed"}."
+      else
+        flash[:danger] = "Failed to #{term_params[:open] ? "open" : "close"} term #{term.to_s}."
+      end
     end
 
     redirect_to(action: :index)

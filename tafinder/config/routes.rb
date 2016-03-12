@@ -25,10 +25,8 @@ Rails.application.routes.draw do
 
     get 'terms', to: 'terms#index', as: 'terms'
     post 'terms', to: 'terms#create', as: 'create_term'
-    patch 'terms/:id/open', to: 'terms#open', as: 'open_term'
-    put 'terms/:id/open', to: 'terms#open'
-    patch 'terms/:id/close', to: 'terms#close', as: 'close_term'
-    put 'terms/:id/close', to: 'terms#close'
+    patch 'terms/:id', to: 'terms#update', as: 'update_term'
+    put 'terms/:id', to: 'terms#update'
   end
 
   # You can have the root of your site routed with "root"
