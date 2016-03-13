@@ -35,6 +35,7 @@ class CoursesController < ApplicationController
       next if (row[6] == "LEC" || row[0] == "Instructor Name")
 
       Course.create(
+        instructor_name: row[0],
         subject: row[1],
         number: row[2],
         section: row[4],

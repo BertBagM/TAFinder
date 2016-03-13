@@ -1,5 +1,5 @@
 <table border="1">
-  <tr> # excel headers
+  <tr>
     <th>Instructor Name</th>
     <th>Subject</th>
     <th>Course</th>
@@ -26,8 +26,8 @@
   </tr>
 
   <% @courses.each do |course| %>
-      <tr> # attributes
-        <td><%= course.name %></td>
+      <tr>
+        <td><%= course.instructor_name %></td>
         <td><%= course.subject %></td>
         <td><%= course.number%></td>
         <th></th>
@@ -35,14 +35,14 @@
         <td><%= course.term %></td>
         <td><%= course.act_type %></td>
         <td><%= course.days %></td>
-        <td><%= course.start_time %></td>
-        <td><%= course.end_time %></td>
+        <td><%= course.start_time.strftime("%I:%M %p") if course.start_time %></td>
+        <td><%= course.end_time.strftime("%I:%M %p") if course.start_time %></td>
         <th>Last</th>
         <th>First</th>
-        <td><%= course.lab %></td>
-        <td><%= course.mark %></td>
-        <td><%= course.coord %></td>
-        <td><%= course.graduate %></td>
+        <td><%= course.lab_time %></td>
+        <td><%= course.mark_time %></td>
+        <td><%= course.coord_time %></td>
+        <td>Graduate</td>
         <th></th>
         <td><%= course.enrolled_est %></td>
         <td><%= course.released %></td>
