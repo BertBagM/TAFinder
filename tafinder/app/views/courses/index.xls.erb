@@ -25,36 +25,11 @@
     <th>Cap</th>
   </tr>
 
-  <tr> # excel headers to match Ashlee
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th>Last</th>
-    <th>First</th>
-    <th>Labs</th>
-    <th>Marking</th>
-    <th>Coord</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
   <% @courses.each do |course| %>
       <tr> # attributes
         <td><%= course.name %></td>
         <td><%= course.subject %></td>
-        <td><%= course.course %></td>
+        <td><%= course.number%></td>
         <th></th>
         <td><%= course.section %></td>
         <td><%= course.term %></td>
@@ -70,11 +45,11 @@
         <td><%= course.graduate %></td>
         <th></th>
         <td><%= course.enrolled_est %></td>
-        <td><%= course.release %></td>
+        <td><%= course.released %></td>
         <td><%= course.enrolled %></td>
         <td><%= course.building %></td>
         <td><%= course.room %></td>
-        <td><%= course.cap %></td>
+        <td><%= course.capacity %></td>
       </tr>
   <% end %>
 </table>
