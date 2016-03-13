@@ -25,16 +25,46 @@
             <table class="table table-bordered table-hover">
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Subject</th>
+                    <th>Number</th>
                     <th>Section</th>
+                    <th>Term</th>
+                    <th>Act Type</th>
+                    <th>Days Met</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Lab Hours</th>
+                    <th>Marking Hours</th>
+                    <th>Coordination Hours</th>
+                    <th>Estimated Enrollment</th>
+                    <th>Enrollment</th>
+                    <th>Released</th>
+                    <th>Capacity</th>
+                    <th>Building</th>
+                    <th>Room</th>
                     <th></th>
                 </tr>
 
                 <% @courses.each do |course| %>
                 <tr>
                     <td><%= course.id %></td>
-                    <td><%= course.name %></td>
+                    <td><%= course.subject %></td>
+                    <td><%= course.number %></td>
                     <td><%= course.section %></td>
+                    <td><%= course.term %></td>
+                    <td><%= course.act_type %></td>
+                    <td><%= course.days %></td>
+                    <td><%= course.start_time.strftime("%I:%M %p") if course.start_time %></td>
+                    <td><%= course.end_time.strftime("%I:%M %p") if course.end_time %></td>
+                    <td><%= course.lab_time %></td>
+                    <td><%= course.mark_time %></td>
+                    <td><%= course.coord_time %></td>
+                    <td><%= course.enrolled_est %></td>
+                    <td><%= course.enrolled %></td>
+                    <td><%= course.released %></td>
+                    <td><%= course.capacity %></td>
+                    <td><%= course.building %></td>
+                    <td><%= course.room %></td>
                     <td>
                         <a href="<%# course_edit_path(course) %>" class="glyphicon glyphicon-pencil"></a>
                     </td>
