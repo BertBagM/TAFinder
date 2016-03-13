@@ -4,23 +4,22 @@ class ApplicationsController < ApplicationController
 
 
   def index
+    @applications = Application.all.joins(:terms)
     @order_options = order_params()
     @order_dir_options = order_dir_params()
 
     if (params[:q].present?)
       query = "%#{params["q"]}%"
-      @applications = Application.where(
+      @applications = @applications.where(
         "student_id LIKE ? OR "\
         "first_name LIKE ? OR "\
         "last_name LIKE ? OR "\
         "email LIKE ?",
       query, query, query, query)
-    else
-      @applications = Application.all
     end
 
     if (params[:filter_term] == "on")
-      #TODO: filter current term here
+      @applications = @applications.where(terms: { open: true })
     end
 
     if (params[:filter_grad] == "on")
@@ -29,7 +28,7 @@ class ApplicationsController < ApplicationController
 
     if (validate_param(params[:order], order_params))
       order_dir = validate_param(params[:order_dir], order_dir_params) ? params[:order_dir] : :asc
-      @applications = @applications.order(params[:order], order_dir)
+      @applications = @applications.order(params[:order] => order_dir)
     end
 
     respond_to do |format|
@@ -169,7 +168,7 @@ class ApplicationsController < ApplicationController
   end
 
   def validate_param(param, valid_params)
-    valid_params.keys().include?(param)
+    valid_params.keys().map{ |k| k.to_s }.include?(param)
   end
 
 end
