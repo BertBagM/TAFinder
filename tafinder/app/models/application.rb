@@ -1,5 +1,5 @@
 class Application < ActiveRecord::Base
-  has_many :rankings
+  has_many :rankings, dependent: :destroy
   has_many :terms, through: :rankings
 
   #validates_assocaited :terms
@@ -53,7 +53,7 @@ class Application < ActiveRecord::Base
     presence: true
   validates :maximum_hours,
     presence: true
-  validate :validate_email_term_uniqueness
+  validate :validate_student_id_term_uniqueness
 
 
     def self.to_csv(options = {})
@@ -72,7 +72,9 @@ class Application < ActiveRecord::Base
 
   private
 
-  def validate_email_term_uniqueness
-
+  def validate_student_id_term_uniqueness
+    if (Application.joins(:terms).where(student_id: student_id, terms: { id: terms.pluck(:id) }).where.not(id: id).present?)
+      errors.add(:student_id, "has already been used for at least one of the provided terms")
+    end
   end
 end
