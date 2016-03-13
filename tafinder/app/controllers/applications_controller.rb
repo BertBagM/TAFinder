@@ -1,6 +1,6 @@
 class ApplicationsController < ApplicationController
-  before_action :validate_logged_in, except: [:create, :new, :delete, :request_revoke]
-  before_action :sanatize_params
+  before_action :validate_logged_in, except: [:create, :new, :change, :request_change]
+  before_action :sanatize_params, only: [:create, :update]
 
 
   def index
@@ -84,22 +84,23 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  def delete
+  def change
+    @term_options = Term.all
   end
 
-  def request_revoke
+  def request_change
     # TODO(scott): we also need to find_by year and semester
-    @application = Application.find_by(email: application_params[:email])
+    @application = Application.joins(:terms).find_by(student_id: application_params[:student_id], terms: {id: application_params[:term_ids]})
 
     if @application.present?
-      flash[:success] = "An email has been sent requesting for your application to be revoked."
+      flash[:success] = "An email has been sent requesting for your application to be changed."
 
-      UserMailer.revoke_application_request_email(@application).deliver
+      UserMailer.change_application_request_email(@application, params[:message]).deliver
     else
       flash[:danger] = "Could not find an application associated with that email."
     end
 
-    redirect_to(action: :delete)
+    redirect_to(action: :change)
   end
 
   def destroy

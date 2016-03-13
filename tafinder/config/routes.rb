@@ -6,8 +6,8 @@ Rails.application.routes.draw do
 
   get 'applications/new', to: 'applications#new', as: 'new_application'
   post 'applications', to: 'applications#create', as: 'create_application'
-  get 'applications/revoke', to: 'applications#delete', as: 'delete_application'
-  post 'applications/revoke', to: 'applications#request_revoke'
+  get 'applications/change', to: 'applications#change', as: 'change_application'
+  post 'applications/change', to: 'applications#request_change'
 
   scope :admin do
     get 'login', to: 'sessions#new', as: 'login'
