@@ -28,23 +28,32 @@ class CoursesController < ApplicationController
     # @worksheet.rows often seem to be empty, but this will work:
     0.upto @worksheet.last_row_index do |index|
       # .row(index) will return the row which is a subclass of Array
-      begin
-        # First try an extended login. If it fails because the
-        # server doesn't support it, fall back to a normal login
-        row = @worksheet.row(index)
-        if row[6] =="LEC" || row[4].length !=3 ||  row[4].length == "WL1"|| row[0] == "Instructor Name" || row[4] == "" || row[5] == "" || row[0] == ""
+      # First try an extended login. If it fails because the
+      # server doesn't support it, fall back to a normal login
+      row = @worksheet.row(index)
 
-        else
-          Course.create(name: row[0], subject: row[1], number: row[2], section: row[4], term: row[5], act_type: row[6], days: row[7], start_time: row[8], end_time: row[9], lab: row[12], mark: row[13], coord: row[14], graduate: row[15], enrolled_est: row[17], enrolled: row[19], released: row[18], capacity: row[22], building: row[20], room: row[21])
-        end
-      rescue
+      next if (row[6] == "LEC" || row[0] == "Instructor Name")
 
-
-      end
-
-
+      Course.create(
+        subject: row[1],
+        number: row[2],
+        section: row[4],
+        term: row[5],
+        act_type: row[6],
+        days: row[7],
+        start_time: row[8],
+        end_time: row[9],
+        lab_time: row[11].to_i,
+        mark_time: row[12].to_i,
+        coord_time: row[13].to_i,
+        enrolled_est: row[16].to_i,
+        enrolled: row[19].to_i,
+        released: row[18].to_i,
+        capacity: row[22].to_i,
+        building: row[20],
+        room: row[21]
+      )
     end
-
 
     redirect_to(action: :index)
   end
