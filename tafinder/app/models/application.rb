@@ -2,21 +2,36 @@ class Application < ActiveRecord::Base
   has_many :rankings, dependent: :destroy
   has_many :terms, through: :rankings
 
-  #validates_assocaited :terms
   validates :student_id,
-    presence: true
+    presence: true,
+    length: {
+      is: 8
+    }
   validates :first_name,
-    presence: true
+    presence: true,
+    length: {
+      in: 1..255
+    }
   validates :last_name,
-    presence: true
+    presence: true,
+    length: {
+      in: 1..255
+    }
   validates :email,
     presence: true,
     length: {
-      in: 3..50
+      in: 3..255
     },
     format: /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i
+  validates :gpa,
+    inclusion: {
+      in: 0.0..4.0
+    }
   validates :faculty,
-    presence: true
+    presence: true,
+    length: {
+      in: 1..255
+    }
   validates :study_year,
     presence: true
   validates :graduate,
@@ -30,11 +45,20 @@ class Application < ActiveRecord::Base
   validates :gender,
     presence: true
   validates :street,
-    presence: true
+    presence: true,
+    length: {
+      in: 1..255
+    }
   validates :city,
-    presence: true
+    presence: true,
+    length: {
+      in: 1..255
+    }
   validates :postal_code,
-    presence: true
+    presence: true,
+    length: {
+      in: 1..255
+    }
   validates :home_phone,
     length: {
       is: 14
@@ -50,10 +74,19 @@ class Application < ActiveRecord::Base
       in: [true, false]
     }
   validates :preferred_hours,
-    presence: true
+    presence: true,
+    inclusion: {
+      in: 2..12,
+      message: "must be greater than 2 and less than 12"
+    }
   validates :maximum_hours,
-    presence: true
+    presence: true,
+    inclusion: {
+      in: 2..12,
+      message: "must be greater than 2 and less than 12"
+    }
   validate :validate_student_id_term_uniqueness
+  validate :validate_preferred_hours_less_or_equal_maximum_hours
 
 
     def self.to_csv(options = {})
@@ -75,6 +108,12 @@ class Application < ActiveRecord::Base
   def validate_student_id_term_uniqueness
     if (Application.joins(:terms).where(student_id: student_id, terms: { id: terms.pluck(:id) }).where.not(id: id).present?)
       errors.add(:student_id, "has already been used for at least one of the provided terms")
+    end
+  end
+
+  def validate_preferred_hours_less_or_equal_maximum_hours
+    if (preferred_hours > maximum_hours)
+      errors.add(:preferred_hours, "must be less than maximum hours (#{maximum_hours})")
     end
   end
 end
