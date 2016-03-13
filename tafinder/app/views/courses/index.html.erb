@@ -25,6 +25,7 @@
             <table class="table table-bordered table-hover">
                 <tr>
                     <th>ID</th>
+                    <th>Instructor</th>
                     <th>Subject</th>
                     <th>Number</th>
                     <th>Section</th>
@@ -48,6 +49,7 @@
                 <% @courses.each do |course| %>
                 <tr>
                     <td><%= course.id %></td>
+                    <td><%= course.instructor_name %></td>
                     <td><%= course.subject %></td>
                     <td><%= course.number %></td>
                     <td><%= course.section %></td>

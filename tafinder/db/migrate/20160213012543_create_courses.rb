@@ -1,6 +1,7 @@
 class CreateCourses < ActiveRecord::Migration
   def change
     create_table :courses do |t|
+      t.string  :instructor_name
       t.string  :subject, limit: 4, null: false
       t.string  :number, limit: 3, null: false
       t.string  :section, limit: 3

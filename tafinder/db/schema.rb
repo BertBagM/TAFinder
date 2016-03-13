@@ -39,25 +39,26 @@ ActiveRecord::Schema.define(version: 20160311011821) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string   "subject",      limit: 4,              null: false
-    t.string   "number",       limit: 3,              null: false
-    t.string   "section",      limit: 3
-    t.string   "term",         limit: 3
-    t.string   "act_type",     limit: 3
-    t.string   "days",         limit: 5, default: ""
+    t.string   "instructor_name"
+    t.string   "subject",         limit: 4,              null: false
+    t.string   "number",          limit: 3,              null: false
+    t.string   "section",         limit: 3
+    t.string   "term",            limit: 3
+    t.string   "act_type",        limit: 3
+    t.string   "days",            limit: 5, default: ""
     t.time     "start_time"
     t.time     "end_time"
-    t.integer  "lab_time",               default: 0
-    t.integer  "mark_time",              default: 0
-    t.integer  "coord_time",             default: 0
-    t.integer  "enrolled_est",           default: 0
-    t.integer  "enrolled",               default: 0
-    t.integer  "released",               default: 0
-    t.integer  "capacity",               default: 0
-    t.string   "building",     limit: 3
-    t.string   "room",         limit: 4
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.integer  "lab_time",                  default: 0
+    t.integer  "mark_time",                 default: 0
+    t.integer  "coord_time",                default: 0
+    t.integer  "enrolled_est",              default: 0
+    t.integer  "enrolled",                  default: 0
+    t.integer  "released",                  default: 0
+    t.integer  "capacity",                  default: 0
+    t.string   "building",        limit: 3
+    t.string   "room",            limit: 4
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "preferred_courses", force: :cascade do |t|
