@@ -40,13 +40,20 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    byebug
-    application = Application.create(application_params)
+    terms = Term.where(id: application_params[:term_ids])
 
-    if (application.valid?)
-      flash[:success] = "Your application has been submitted"
+    if (terms.present?)
+      application = Application.new(application_params)
+      application.terms = terms
+      application.save()
+
+      if (application.valid?)
+        flash[:success] = "Your application has been submitted"
+      else
+        flash[:danger] = application.errors.full_messages.first
+      end
     else
-      flash[:danger] = application.errors.full_messages.first
+      flash[:danger] = "Could not find terms with the supplied IDs"
     end
 
     redirect_to(action: :new)
@@ -131,7 +138,7 @@ class ApplicationsController < ApplicationController
       :previous_ta,
       :preferred_hours,
       :maximum_hours,
-      :terms
+      term_ids: []
     )
   end
 

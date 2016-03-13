@@ -4,7 +4,7 @@
     <p>Select all terms that you wish to apply for</p>
     <% term_options.each do |term| %>
     <label for="term-<%= term.to_s %>-input"><%= term.to_s %></label>
-    <input id="term-<%= term.to_s %>-input" type="checkbox" name="application[terms][]" value="<%= term.id %>" />
+    <input id="term-<%= term.to_s %>-input" type="checkbox" name="application[term_ids][]" value="<%= term.id %>" />
     <% end %>
 </div>
 
