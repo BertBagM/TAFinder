@@ -32,14 +32,15 @@ class CoursesController < ApplicationController
         # First try an extended login. If it fails because the
         # server doesn't support it, fall back to a normal login
         row = @worksheet.row(index)
-        Course.create(name: row[0], subject: row[1], number: row[2], section: row[4], term: row[5], act_type: row[6],  days: row[7], start_time: row[8], end_time: row[9], lab: row[12], mark: row[13], coord: row[14], graduate: row[15], enrolled_est: row[17], enrolled: row[19], released: row[18], capacity: row[22], building: row[20], room: row[21])
+        if row[6] =="LEC" || row[4].length !=3 ||  row[4].length == "WL1"|| row[0] == "Instructor Name" || row[4] == "" || row[5] == "" || row[0] == ""
 
+        else
+          Course.create(name: row[0], subject: row[1], number: row[2], section: row[4], term: row[5], act_type: row[6], days: row[7], start_time: row[8], end_time: row[9], lab: row[12], mark: row[13], coord: row[14], graduate: row[15], enrolled_est: row[17], enrolled: row[19], released: row[18], capacity: row[22], building: row[20], room: row[21])
+        end
       rescue
 
 
       end
-
-
 
 
     end
