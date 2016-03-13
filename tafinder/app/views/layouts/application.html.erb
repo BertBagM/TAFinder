@@ -18,7 +18,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="#">TA Finder</a>
+                  <a class="navbar-brand" href="<%= root_path %>">TA Finder</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -30,9 +30,12 @@
                         <li>
                             <a href="<%= courses_path %>">Courses</a>
                         </li>
+                        <li>
+                            <a href="<%= terms_path %>">Terms</a>
+                        </li>
                         <% else %>
                         <li>
-                            <a href="<%= delete_application_path %>">Revoke Application</a>
+                            <a href="<%= change_application_path %>">Modify Application</a>
                         </li>
                         <% end %>
                     </ul>

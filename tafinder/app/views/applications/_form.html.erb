@@ -1,6 +1,14 @@
 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
 
 <div class="form-group">
+    <p>Select all terms that you wish to apply for</p>
+    <% term_options.each do |term| %>
+    <label for="term-<%= term.to_s %>-input"><%= term.to_s %></label>
+    <input id="term-<%= term.to_s %>-input" type="checkbox" name="application[term_ids][]" value="<%= term.id %>" />
+    <% end %>
+</div>
+
+<div class="form-group">
     <label for="first-name-input">First Name</label>
     <input id="first-name-input" type="text" name="application[first_name]" value="<%= application.first_name if application.present? %>" />
 </div>
@@ -41,9 +49,11 @@
 </div>
 
 <div class="form-group">
-    <label for="gender-input">Gender</label>
-    <input id="program-input" type="radio" name="application[gender]" value="Male" <%= "checked" if application.present? && application.gender == 'Male' %> /> Male
-    <input id="program-input" type="radio" name="application[gender]" value="Female" <%= "checked" if application.present? && application.gender == 'Female' %>/> Female
+    <p>Gender</p>
+    <label for="gender-male-input">Male</label>
+    <input id="gender-male-input" type="radio" name="application[gender]" value="Male" <%= "checked" if application.present? && application.gender == 'Male' %> />
+    <label for="gender-female-input">Female</label>
+    <input id="gender-female-input" type="radio" name="application[gender]" value="Female" <%= "checked" if application.present? && application.gender == 'Female' %>/>
 </div>
 
 <div class="form-group">
@@ -77,19 +87,31 @@
 </div>
 
 <div class="form-group">
-    <label for="graduate-full-time-input">Will you be a full-time graduate student in Winter 2015/16?</label>
-    <input id="graduate-full-time-input" type="radio" name="application[graduate_full_time]" value="true" <%= "checked" if application.present? && application.graduate_full_time %> /> Yes
-    <input id="graduate-full-time-input" type="radio" name="application[graduate_full_time]" value="false" <%= "checked" if application.present? && !application.graduate_full_time %> /> No
+    <p>Will you be a graduate student in the term(s) you are applying for?</p>
+    <label for="graduate-yes-input">Yes</label>
+    <input id="graduate-yes-input" type="radio" name="application[graduate]" value="true" <%= "checked" if application.present? && application.graduate %> />
+    <label for="graduate-no-input">No</label>
+    <input id="graduate-no-input" type="radio" name="application[graduate]" value="false" <%= "checked" if application.present? && !application.graduate %> />
 </div>
 
 <div class="form-group">
-    <label for="previous-ta-input">Have you held a previous UTA position at UBC O?</label>
-    <input id="previous-ta-input" type="radio" name="application[previous_ta]" value="true" <%= "checked" if application.present? && application.previous_ta %> /> Yes
-    <input id="previous-ta-input" type="radio" name="application[previous_ta]" value="false" <%= "checked" if application.present? && !application.previous_ta %> /> No
+    <p>Will you be a full-time graduate student in the term(s) you are applying for?</p>
+    <label for="graduate-full-time-yes-input">Yes</label>
+    <input id="graduate-full-time-yes-input" type="radio" name="application[graduate_full_time]" value="true" <%= "checked" if application.present? && application.graduate_full_time %> />
+    <label for="graduate-full-time-no-input">No</label>
+    <input id="graduate-full-time-no-input" type="radio" name="application[graduate_full_time]" value="false" <%= "checked" if application.present? && !application.graduate_full_time %> />
 </div>
 
 <div class="form-group">
-    <label>Number of hours per week (minimum 2; maximum 12):</label>
+    <p>Have you held a previous UTA position at UBC O?</p>
+    <label for="previous-ta-yes-input">Yes</label>
+    <input id="previous-ta-yes-input" type="radio" name="application[previous_ta]" value="true" <%= "checked" if application.present? && application.previous_ta %> />
+    <label for="previous-ta-no-input">No</label>
+    <input id="previous-ta-no-input" type="radio" name="application[previous_ta]" value="false" <%= "checked" if application.present? && !application.previous_ta %> />
+</div>
+
+<div class="form-group">
+    <p>Number of hours per week (minimum 2; maximum 12):</p>
     <label for="preferred-hours-input">Preferred Hours</label>
     <input id="preferred-hours-input" type="number" name="application[preferred_hours]" min="2" max="12" step="1" value="<%= application.preferred_hours if application.present? %>" />
 

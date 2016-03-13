@@ -6,8 +6,8 @@ Rails.application.routes.draw do
 
   get 'applications/new', to: 'applications#new', as: 'new_application'
   post 'applications', to: 'applications#create', as: 'create_application'
-  get 'applications/revoke', to: 'applications#delete', as: 'delete_application'
-  post 'applications/revoke', to: 'applications#request_revoke'
+  get 'applications/change', to: 'applications#change', as: 'change_application'
+  post 'applications/change', to: 'applications#request_change'
 
   scope :admin do
     get 'login', to: 'sessions#new', as: 'login'
@@ -27,10 +27,8 @@ Rails.application.routes.draw do
 
     get 'terms', to: 'terms#index', as: 'terms'
     post 'terms', to: 'terms#create', as: 'create_term'
-    patch 'terms/:id/open', to: 'terms#open', as: 'open_term'
-    put 'terms/:id/open', to: 'terms#open'
-    patch 'terms/:id/close', to: 'terms#close', as: 'close_term'
-    put 'terms/:id/close', to: 'terms#close'
+    patch 'terms/:id', to: 'terms#update', as: 'update_term'
+    put 'terms/:id', to: 'terms#update'
   end
 
   # You can have the root of your site routed with "root"

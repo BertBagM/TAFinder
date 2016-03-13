@@ -1,25 +1,25 @@
 class ApplicationsController < ApplicationController
-  before_action :validate_logged_in, except: [:create, :new, :delete, :request_revoke]
+  before_action :validate_logged_in, except: [:create, :new, :change, :request_change]
+  before_action :sanatize_params, only: [:create, :update]
 
 
   def index
+    @applications = Application.all.joins(:terms)
     @order_options = order_params()
     @order_dir_options = order_dir_params()
 
     if (params[:q].present?)
       query = "%#{params["q"]}%"
-      @applications = Application.where(
+      @applications = @applications.where(
         "student_id LIKE ? OR "\
         "first_name LIKE ? OR "\
         "last_name LIKE ? OR "\
         "email LIKE ?",
       query, query, query, query)
-    else
-      @applications = Application.all
     end
 
     if (params[:filter_term] == "on")
-      #TODO: filter current term here
+      @applications = @applications.where(terms: { open: true })
     end
 
     if (params[:filter_grad] == "on")
@@ -28,7 +28,7 @@ class ApplicationsController < ApplicationController
 
     if (validate_param(params[:order], order_params))
       order_dir = validate_param(params[:order_dir], order_dir_params) ? params[:order_dir] : :asc
-      @applications = @applications.order(params[:order], order_dir)
+      @applications = @applications.order(params[:order] => order_dir)
     end
 
     respond_to do |format|
@@ -39,20 +39,32 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    if @applications = Application.create(application_params())
-      flash[:success] = "Your application has been submitted."
+    terms = Term.where(id: application_params[:term_ids])
+
+    if (terms.present?)
+      application = Application.new(application_params)
+      application.terms = terms
+      application.save()
+
+      if (application.valid?)
+        flash[:success] = "Your application has been submitted"
+      else
+        flash[:danger] = application.errors.full_messages.first
+      end
     else
-      flash[:danger] = "Unable to create application."
+      flash[:danger] = "Could not find terms with the supplied IDs"
     end
 
-    render(action: :new)
+    redirect_to(action: :new)
   end
 
   def new
+    @term_options = Term.where(open: true)
   end
 
   def edit
     @application = Application.find_by_id(params[:id])
+    @term_options = Term.all
 
     if @application.nil?
       flash[:warning] = "No applications were found with ID #{params[:id]}."
@@ -71,22 +83,23 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  def delete
+  def change
+    @term_options = Term.all
   end
 
-  def request_revoke
+  def request_change
     # TODO(scott): we also need to find_by year and semester
-    @application = Application.find_by(email: application_params[:email])
+    @application = Application.joins(:terms).find_by(student_id: application_params[:student_id], terms: {id: application_params[:term_ids]})
 
     if @application.present?
-      flash[:success] = "An email has been sent requesting for your application to be revoked."
+      flash[:success] = "An email has been sent requesting for your application to be changed."
 
-      UserMailer.revoke_application_request_email(@application).deliver
+      UserMailer.change_application_request_email(@application, params[:message]).deliver
     else
       flash[:danger] = "Could not find an application associated with that email."
     end
 
-    redirect_to(action: :delete)
+    redirect_to(action: :change)
   end
 
   def destroy
@@ -124,8 +137,14 @@ class ApplicationsController < ApplicationController
       :cell_phone,
       :previous_ta,
       :preferred_hours,
-      :maximum_hours
+      :maximum_hours,
+      term_ids: []
     )
+  end
+
+  def sanatize_params
+    params[:application][:cell_phone] = format_phone_number(application_params[:cell_phone])
+    params[:application][:home_phone] = format_phone_number(application_params[:home_phone])
   end
 
   def order_params
@@ -149,7 +168,7 @@ class ApplicationsController < ApplicationController
   end
 
   def validate_param(param, valid_params)
-    valid_params.keys().include?(param)
+    valid_params.keys().map{ |k| k.to_s }.include?(param)
   end
 
 end
