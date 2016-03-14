@@ -19,8 +19,10 @@
                     </select>
                 </div>
 
-                <button class="btn btn-default" type="submit">Add Term</button>
+                <button class="btn btn-primary" type="submit">Add Term</button>
             </form>
+
+            <hr>
 
             <% if (!@terms.empty?) %>
 
@@ -47,14 +49,16 @@
                                 </select>
                             </div>
 
-                            <button class="btn btn-default" type="submit">Update</button>
+                            <button class="btn btn-primary" type="submit">Update</button>
                         </form>
                     </td>
                 </tr>
                 <% end %>
             </table>
 
-        <% end %>
+            <% end %>
+
+            <hr>
         </div>
     </div>
 </div>

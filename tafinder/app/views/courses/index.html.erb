@@ -5,14 +5,20 @@
                 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
 
                 <div class="form-group">
-                    <label for="import-course-input">File</label>
-                    <input id="import-course-input" type="file" name="course_file" />
+                    <label class="btn btn-primary" for="import-course-input">
+                        <input id="import-course-input" type="file" name="course_file" style="display:none;" />
+                        <span>Browse</span>
+                    </label>
+
+                    <button class="btn btn-primary" type="submit">Upload</button>
                 </div>
 
-                <button class="btn btn-default" type="submit">Upload File</button>
+                <div class="form-group">
+                    <a href="<%= courses_path(format: "xls" ) %>" class="btn btn-primary">Export</a>
+                </div>
             </form>
 
-          <a href = "<%=courses_path(format: "xls" )%>" class = "btn btn-default">Export</a>
+            <hr>
 
             <% if (@courses.empty?) %>
 
@@ -74,7 +80,9 @@
                 <% end %>
             </table>
 
-        <% end %>
+            <% end %>
+
+            <hr>
         </div>
     </div>
 </div>

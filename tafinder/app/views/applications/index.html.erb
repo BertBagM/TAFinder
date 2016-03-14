@@ -3,12 +3,20 @@
         <div class="col-xs-12">
             <form class="form-inline" accept-charset="UTF-8" action="<%= applications_path %>" method="get">
                 <div class="form-group">
+                    <br>
+                    <button class="btn btn-primary" type="submit">Apply</button>
+                    <a class="btn btn-danger" href="<%= applications_path %>">Clear</a>
+                </div>
+
+                <div class="form-group">
                     <label for="application-search-input">Search</label>
+                    <br>
                     <input id="application-search-input" class="form-control" type="text" name="q" <%= "value=#{params[:q]}" if (params[:q].present?) %> placeholder="Query" />
                 </div>
 
                 <div class="form-group">
                     <label for="application-order-input">Order</label>
+                    <br>
                     <select id="application-order-input" class="form-control" name="order">
                         <% @order_options.each do |value, name| %>
                         <option value="<%= value %>" <%= "selected" if (value.to_s == params[:order]) %>><%= name %></option>
@@ -23,25 +31,25 @@
 
                 <div class="form-group">
                     <label>Filter</label>
+                    <br>
 
                     <div class="checkbox">
-                        <label>
+                        <label class="checkbox-inline">
                             <input type="checkbox" name="filter_term" <%= "checked" if (params[:filter_term] == "on") %> />
                             <span>Current Term</span>
                         </label>
                     </div>
 
                     <div class="checkbox">
-                        <label>
+                        <label class="checkbox-inline">
                             <input type="checkbox" name="filter_grad" <%= "checked" if (params[:filter_grad] == "on") %> />
                             <span>Graduates Only</span>
                         </label>
                     </div>
                 </div>
-
-                <a class="btn btn-default pull-right" href="<%= applications_path %>">Clear</a>
-                <button class="btn btn-default pull-right" type="submit">Apply</button>
             </form>
+
+            <hr>
 
             <% if (@applications.empty?) %>
 
@@ -83,7 +91,9 @@
                 <% end %>
             </table>
 
-        <% end %>
+            <% end %>
+
+            <hr>
         </div>
     </div>
 </div>
