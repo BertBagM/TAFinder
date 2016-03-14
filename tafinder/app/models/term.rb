@@ -24,7 +24,7 @@ class Term < ActiveRecord::Base
 
 
   def to_s
-    "#{year}#{semester[0]}"
+    "#{year}#{semester[0].capitalize}"
   end
 
   def semester_index

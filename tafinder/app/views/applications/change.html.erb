@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col-xs-12">
             <h1>Request for Application Modification/Removal</h1>
+            <hr>
             <p>Enter your student ID and a message below to notify the admin that you would like to make a change to your submission.</p>
         </div>
     </div>
@@ -18,8 +19,10 @@
 
                 <div class="form-group">
                     <% @term_options.each do |term| %>
-                    <label for="term-<%= term.to_s %>-input"><%= term.to_s %></label>
-                    <input id="term-<%= term.to_s %>-input" type="checkbox" name="application[term_ids][]" value="<%= term.id %>" />
+                    <label class="checkbox-inline">
+                        <input id="term-<%= term.to_s %>-input" type="checkbox" name="application[term_ids][]" value="<%= term.id %>" />
+                        <span><%= term.to_s %></span>
+                    </label>
                     <% end %>
                 </div>
 
@@ -28,7 +31,7 @@
                     <textarea id="message-input" class="form-control" name="message" rows="10"></textarea>
                 </div>
 
-                <button class="btn btn-default" type="submit">Send Request</button>
+                <button class="btn btn-primary" type="submit">Send Request</button>
             </form>
         </div>
     </div>
