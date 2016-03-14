@@ -27,6 +27,18 @@ class Term < ActiveRecord::Base
     "#{year}#{semester[0]}"
   end
 
+  def semester_index
+    if (fall?)
+      1
+    elsif (winter?)
+      2
+    elsif (summer?)
+      3
+    else
+      -1
+    end
+  end
+
 
   private
 

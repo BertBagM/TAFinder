@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  root 'applications#new'
+  root 'home#index'
 
   get 'applications/new', to: 'applications#new', as: 'new_application'
   post 'applications', to: 'applications#create', as: 'create_application'

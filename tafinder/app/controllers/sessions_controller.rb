@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
     if (authorized_user)
       session[:user_id] = authorized_user.id
-      redirect_to(courses_path)
+      redirect_to(applications_path)
     else
       flash.now[:danger] = 'Invalid email or password'
       render('new')

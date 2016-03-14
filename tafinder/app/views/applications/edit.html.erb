@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col-xs-12">
             <h1>Edit Application <%= @application.id %></h1>
+            <hr>
         </div>
     </div>
 
@@ -11,6 +12,7 @@
                 <input name="_method" type="hidden" value="patch" />
                 <%= render(partial: "form", locals: { application: @application, term_options: @term_options }) %>
             </form>
+            <hr>
         </div>
     </div>
 </div>

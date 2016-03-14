@@ -18,12 +18,51 @@
 @import 'bootstrap';
 
 
+$primary-text-color: #002145;
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: #022244;
+}
+
+.btn.btn-primary {
+    background-color: #286090;
+    border-color: #204d74;
+    color: #ffffff;
+}
+
+#header-container {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+
+    background-color: $primary-text-color;
+    border-top: 3px solid #fff;
+
+    .row {
+        margin: 0;
+
+        .header-column {
+            height: 95px;
+
+            &:not(:nth-child(1)) {
+                border-left: 1px solid #1f385f;
+            }
+        }
+    }
+}
+
 #main-container {
     margin: 15px 0;
 }
 
 .navbar {
     margin-bottom: 0;
+
+    .navbar-nav > li > a, .navbar-nav > li button {
+        color: $primary-text-color;
+    }
 }
 
 .navbar .btn {
@@ -36,5 +75,32 @@
 
     &:focus {
         outline: none;
+    }
+}
+
+.ubc-sprite {
+    background-image: image-url("ubc_sprites.png");
+    background-size: 1500px;
+    background-repeat: no-repeat;
+
+    &.ubc-logo {
+        height: 100%;
+        width: 68px;
+
+        background-position: 11px -115px;
+    }
+
+    &.ubc-100-logo {
+        height: 100%;
+        width: 138px;
+
+        background-position: -73px -115px;
+    }
+
+    &.ubc-wordmark {
+        height: 100%;
+        width: 580px;
+
+        background-position: -226px -115px;
     }
 }

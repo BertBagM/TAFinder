@@ -9,7 +9,23 @@
 
     <body>
 
-        <nav class="navbar navbar-default">
+        <header id="header-container" class="container-fluid">
+            <div class="row">
+                <div class="hidden-xs hidden-sm col-md-1 header-column"></div>
+                <a href="<%= root_path %>" class="col-xs-12 col-sm-2 col-md-1 header-column">
+                    <div class="ubc-sprite ubc-logo"></div>
+                </a>
+                <a href="<%= root_path %>" class="hidden-xs hidden-sm col-md-2 header-column">
+                    <div class="ubc-sprite ubc-100-logo"></div>
+                </a>
+                <a href="<%= root_path %>" class="hidden-xs col-sm-10 col-md-7 header-column">
+                    <div class="ubc-sprite ubc-wordmark"></div>
+                </a>
+                <div class="hidden-xs hidden-sm col-md-1 header-column"></div>
+            </div>
+      </header>
+
+        <nav id="navbar-container" class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
                   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -18,7 +34,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="<%= root_path %>">TA Finder</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -34,6 +49,9 @@
                             <a href="<%= terms_path %>">Terms</a>
                         </li>
                         <% else %>
+                        <li>
+                            <a href="<%= root_path %>">Home</a>
+                        </li>
                         <li>
                             <a href="<%= change_application_path %>">Modify Application</a>
                         </li>
