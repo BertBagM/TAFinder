@@ -1,12 +1,11 @@
 class RankingController < ApplicationController
 	before_action :validate_logged_in
 
-	def create
-		Application.find_each do |application|
+	def update
+		Ranking.find_each do |ranking|
+			application = Application.find_by student_id: ranking.application_id, term_id: ranking.term_id
 			score = ranking_alg(application)
-			ranking = Ranking.new(:application_id => application.student_id, :term_id => application.term_id,
-				:position => score, :locked => false)
-			ranking.save()
+			ranking.update_attributes(:position => score)
 		end
   end
 

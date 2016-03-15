@@ -25,7 +25,7 @@ class Application < ActiveRecord::Base
     format: /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i
   validates :gpa,
     inclusion: {
-      in: 0.0..4.0
+      in: 0.0..4.33
     }
   validates :faculty,
     presence: true,
