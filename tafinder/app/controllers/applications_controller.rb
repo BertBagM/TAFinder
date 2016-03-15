@@ -44,6 +44,11 @@ class ApplicationsController < ApplicationController
     if (terms.present?)
       application = Application.new(application_params)
       application.terms = terms
+
+      params[:course][:ids].each do |course_id|
+        application.preferred_courses.new(course_id: course_id)
+      end
+
       application.save()
 
       if (application.valid?)

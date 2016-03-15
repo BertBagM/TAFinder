@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    if (courses instanceof Array) {
+    if (this.courses instanceof Array) {
+        var courses = this.courses;
         var $coursesContainer = $('#courses-container');
         var $preferredSubjectCheckboxes = $('.preferred-subject-checkbox');
 
@@ -27,7 +28,7 @@ function renderCourses(courses) {
             <div class="row">
                 <div class="col-xs-12">
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="application[course_ids][]" value="${course.id}" />
+                        <input type="checkbox" name="course[ids][]" value="${course.id}" />
                         <span>${course.subject} ${course.number}</span>
                     </label>
                 </div>

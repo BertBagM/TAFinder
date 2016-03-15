@@ -1,5 +1,6 @@
 class Application < ActiveRecord::Base
   has_many :rankings, dependent: :destroy
+  has_many :preferred_courses, dependent: :destroy
   has_many :terms, through: :rankings
 
   validates :student_id,
