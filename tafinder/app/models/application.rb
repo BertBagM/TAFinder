@@ -26,7 +26,7 @@ class Application < ActiveRecord::Base
     format: /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i
   validates :gpa,
     inclusion: {
-      in: 0.0..4.0
+      in: 0.0..4.33
     }
   validates :faculty,
     presence: true,
@@ -90,14 +90,14 @@ class Application < ActiveRecord::Base
   validate :validate_preferred_hours_less_or_equal_maximum_hours
 
 
-    def self.to_csv(options = {})
-	    CSV.generate do |csv|
-	      csv << column_names
-	      all.each do |application|
-	        csv << application.attributes.values_at(*column_names)
-	      end
-	    end
-	  end
+  def self.to_csv(options = {})
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |application|
+        csv << application.attributes.values_at(*column_names)
+      end
+    end
+  end
 
   def full_name
     "#{first_name} #{last_name}"
