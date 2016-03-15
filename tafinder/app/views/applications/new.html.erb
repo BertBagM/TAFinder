@@ -11,7 +11,7 @@
             <% if (@term_options.present?) %>
 
             <form class="container-fluid" accept-charset="UTF-8" action="<%= create_application_path %>" method="post">
-            <%= render(partial: "form", locals: { application: nil, term_options: @term_options }) %>
+            <%= render(partial: "form", locals: { application: nil, courses: @courses, term_options: @term_options }) %>
             </form>
             <hr>
 

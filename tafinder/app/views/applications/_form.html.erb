@@ -163,4 +163,31 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="form-group col-xs-12">
+    <p><b>Select your preferred subjects:</b></p>
+
+    <% @courses.pluck(:subject).uniq.each do |subject| %>
+
+    <label class="inline-checkbox">
+        <input class="preferred-subject-checkbox" type="checkbox" value="<%= subject %>" />
+        <span><%= subject %></span>
+    </label>
+
+    <% end %>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-xs-12">
+        <script type="text/javascript">
+            var courses = <%= raw @courses.to_json %>;
+        </script>
+
+        <p><b>Select your preferred courses:</b></p>
+        <div id="courses-container" class="container-fluid"></div>
+    </div>
+</div>
+
 <button class="btn btn-primary" type="submit">Submit Application</button>

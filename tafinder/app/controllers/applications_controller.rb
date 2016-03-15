@@ -59,11 +59,13 @@ class ApplicationsController < ApplicationController
   end
 
   def new
+    @courses = Course.all
     @term_options = Term.where(open: true)
   end
 
   def edit
     @application = Application.find_by_id(params[:id])
+    @courses = Course.all
     @term_options = Term.all
 
     if @application.nil?
