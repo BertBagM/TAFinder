@@ -107,7 +107,7 @@ class Application < ActiveRecord::Base
   private
 
   def validate_student_id_term_uniqueness
-    if (Application.joins(:term).where(student_id: student_id, term_id: { id: terms.pluck(:id) }).where.not(id: id).present?)
+    if (Application.joins(:term).where(student_id: student_id, terms: { id: term_id }).where.not(id: id).present?)
       errors.add(:student_id, "has already been used for this term, please contact administration for help")
     end
   end

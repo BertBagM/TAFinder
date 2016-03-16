@@ -43,10 +43,11 @@ class ApplicationsController < ApplicationController
 
     if (term.present?)
       application = Application.new(application_params)
-      #application.term = term
 
-      params[:course][:ids].each do |course_id|
-        application.preferred_courses.new(course_id: course_id)
+      if (params[:course].present? && params[:course][:ids].present?)
+        params[:course][:ids].each do |course_id|
+          application.preferred_courses.new(course_id: course_id)
+        end
       end
 
       application.save()
