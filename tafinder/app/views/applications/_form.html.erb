@@ -1,12 +1,8 @@
 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
 
 <div class="form-group">
-    <p><b>Select all terms that you wish to apply for:</b></p>
     <% term_options.each do |term| %>
-    <label class="checkbox-inline">
-        <input type="checkbox" name="application[term_ids][]" value="<%= term.id %>" />
-        <span><%= term.to_s %></span>
-    </label>
+        <input type="hidden" name="application[term_id]" value="<%= term.id %>" />
     <% end %>
 </div>
 
@@ -48,7 +44,7 @@
 
 <div class="row">
     <div class="form-group col-xs-12 col-sm-6">
-        <label for="study-year-input">Year of Studies in 2015/16</label>
+        <label for="study-year-input">Year of Studies</label>
         <input id="study-year-input" class="form-control" type="number" name="application[study_year]" min="1" step="1" value="<%= application.study_year if application.present? %>" />
     </div>
 

@@ -1,7 +1,7 @@
 class Application < ActiveRecord::Base
   has_many :rankings, dependent: :destroy
   has_many :preferred_courses, dependent: :destroy
-  has_many :terms, through: :rankings
+  has_one :term, through: :rankings
 
   validates :student_id,
     presence: true,
@@ -108,7 +108,7 @@ class Application < ActiveRecord::Base
 
   def validate_student_id_term_uniqueness
     if (Application.joins(:terms).where(student_id: student_id, terms: { id: terms.pluck(:id) }).where.not(id: id).present?)
-      errors.add(:student_id, "has already been used for at least one of the provided terms")
+      errors.add(:student_id, "has already been used for this term, please contact admininstration for help")
     end
   end
 

@@ -19,7 +19,7 @@ class ApplicationsController < ApplicationController
     end
 
     if (params[:filter_term] == "on")
-      @applications = @applications.where(terms: { open: true })
+      @applications = @applications.where(term: { open: true })
     end
 
     if (params[:filter_grad] == "on")
@@ -39,11 +39,11 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    terms = Term.where(id: application_params[:term_ids])
+    term = Term.where(id: application_params[:term_id])
 
-    if (terms.present?)
+    if (term.present?)
       application = Application.new(application_params)
-      application.terms = terms
+      application.term = term
 
       params[:course][:ids].each do |course_id|
         application.preferred_courses.new(course_id: course_id)
@@ -96,7 +96,7 @@ class ApplicationsController < ApplicationController
 
   def request_change
     # TODO(scott): we also need to find_by year and semester
-    @application = Application.joins(:terms).find_by(student_id: application_params[:student_id], terms: {id: application_params[:term_ids]})
+    @application = Application.joins(:terms).find_by(student_id: application_params[:student_id], terms: {id: application_params[:term_id]})
 
     if @application.present?
       flash[:success] = "An email has been sent requesting for your application to be changed."
@@ -145,7 +145,7 @@ class ApplicationsController < ApplicationController
       :previous_ta,
       :preferred_hours,
       :maximum_hours,
-      term_ids: []
+      :term_id
     )
   end
 
