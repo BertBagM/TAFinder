@@ -4,7 +4,7 @@ class ApplicationsController < ApplicationController
 
 
   def index
-    @applications = Application.all.joins(:terms)
+    @applications = Application.all.joins(:term)
     @order_options = order_params()
     @order_dir_options = order_dir_params()
 
@@ -96,7 +96,7 @@ class ApplicationsController < ApplicationController
 
   def request_change
     # TODO(scott): we also need to find_by year and semester
-    @application = Application.joins(:terms).find_by(student_id: application_params[:student_id], terms: {id: application_params[:term_id]})
+    @application = Application.joins(:term).find_by(student_id: application_params[:student_id], term: {id: application_params[:term_id]})
 
     if @application.present?
       flash[:success] = "An email has been sent requesting for your application to be changed."

@@ -1,6 +1,6 @@
 class Term < ActiveRecord::Base
   has_many :rankings, dependent: :nullify
-  has_many :applications, through: :rankings
+  has_many :applications, dependent: :destroy
 
   enum semester: {
     winter: "W",
