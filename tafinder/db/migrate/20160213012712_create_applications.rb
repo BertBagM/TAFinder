@@ -22,6 +22,7 @@ class CreateApplications < ActiveRecord::Migration
       t.boolean   :previous_ta, default: false, null: false
       t.integer   :preferred_hours, default: 12, null: false
       t.integer   :maximum_hours, default: 12, null: false
+      t.integer   :term_id
 
       t.timestamps null: false
     end

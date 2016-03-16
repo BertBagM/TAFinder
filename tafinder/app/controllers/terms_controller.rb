@@ -21,6 +21,10 @@ class TermsController < ApplicationController
     if (term.present? && term_params[:open].present?)
       term.open = term_params[:open]
 
+      if (term.open)
+        Term.where(open: true).update_all(open: false)
+      end
+
       if (term.save())
         flash[:success] = "Term #{term.to_s} has been #{term_params[:open] ? "opened" : "closed"}."
       else
