@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20160311011821) do
     t.boolean  "previous_ta",                                           default: false, null: false
     t.integer  "preferred_hours",                                       default: 12,    null: false
     t.integer  "maximum_hours",                                         default: 12,    null: false
-    t.integer  "term_id"
+    t.integer  "term_id",                                                               null: false
     t.datetime "created_at",                                                            null: false
     t.datetime "updated_at",                                                            null: false
   end
@@ -71,7 +71,6 @@ ActiveRecord::Schema.define(version: 20160311011821) do
 
   create_table "rankings", force: :cascade do |t|
     t.integer  "application_id",                 null: false
-    t.integer  "term_id",                        null: false
     t.integer  "position"
     t.boolean  "locked",         default: false, null: false
     t.datetime "created_at",                     null: false

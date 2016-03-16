@@ -5,6 +5,7 @@ class ApplicationsController < ApplicationController
 
   def index
     @applications = Application.all.joins(:term)
+    @applications = @applications.all.joins(:ranking)
     @order_options = order_params()
     @order_dir_options = order_dir_params()
 
@@ -157,6 +158,7 @@ class ApplicationsController < ApplicationController
 
   def order_params
     {
+      position: "Ranked Position",
       created_at: "Date Created",
       student_id: "Student Number",
       first_name: "First Name",
