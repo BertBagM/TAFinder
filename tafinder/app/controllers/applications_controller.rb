@@ -29,7 +29,11 @@ class ApplicationsController < ApplicationController
 
     if (validate_param(params[:order], order_params))
       order_dir = validate_param(params[:order_dir], order_dir_params) ? params[:order_dir] : :asc
-      @applications = @applications.order(params[:order] => order_dir)
+      if (params[:order] == "position")
+        @applications = @applications.order("rankings.position " + order_dir)
+      else
+        @applications = @applications.order(params[:order] => order_dir)
+      end
     end
 
     respond_to do |format|

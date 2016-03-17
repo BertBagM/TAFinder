@@ -106,16 +106,15 @@ class Application < ActiveRecord::Base
   end
 
   def create_ranking
-    ranking = Ranking.new(application_id: self.id, position: :ranking_alg)
+    ranking = Ranking.new(application_id: self.id, position: ranking_alg)
     ranking.save()
   end
 
   def update_ranking
-    ranking = Ranking.find_by(application_id: self.id)
-    ranking.update_attributes(:position => :ranking_alg)
+    self.ranking.update_attributes(position: ranking_alg)
   end
 
-  def self.ranking_alg
+  def ranking_alg
     score = 0
     if ((self.faculty == "Sciences") || (self.program == "Computer Science"))
       if (self.graduate)
@@ -133,7 +132,7 @@ class Application < ActiveRecord::Base
         score += 0.1
       end
     end
-    return score
+    score
   end
 
 
