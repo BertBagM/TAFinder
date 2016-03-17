@@ -2,6 +2,8 @@ class Application < ActiveRecord::Base
   has_one :ranking, dependent: :destroy
   has_many :preferred_courses, dependent: :destroy
   belongs_to :term
+  after_create :create_ranking
+  after_update :update_ranking
 
   validates :student_id,
     presence: true,
@@ -101,6 +103,36 @@ class Application < ActiveRecord::Base
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def create_ranking
+    ranking = Ranking.new(application_id: self.id, position: ranking_alg)
+    ranking.save()
+  end
+
+  def update_ranking
+    self.ranking.update_attributes(position: ranking_alg)
+  end
+
+  def ranking_alg
+    score = 0
+    if ((self.faculty == "Sciences") || (self.program == "Computer Science"))
+      if (self.graduate)
+        score += 0.5
+      else
+        score += (self.study_year * 0.025)
+      end
+      if (self.graduate_full_time)
+        score += 0.1
+      end
+      if (self.gpa)
+        score += (self.gpa * 0.046)
+      end
+      if (self.previous_ta)
+        score += 0.1
+      end
+    end
+    score
   end
 
 

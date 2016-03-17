@@ -5,6 +5,7 @@ class ApplicationsController < ApplicationController
 
   def index
     @applications = Application.all.joins(:term)
+    @applications = @applications.all.joins(:ranking)
     @order_options = order_params()
     @order_dir_options = order_dir_params()
 
@@ -28,7 +29,11 @@ class ApplicationsController < ApplicationController
 
     if (validate_param(params[:order], order_params))
       order_dir = validate_param(params[:order_dir], order_dir_params) ? params[:order_dir] : :asc
-      @applications = @applications.order(params[:order] => order_dir)
+      if (params[:order] == "position")
+        @applications = @applications.order("rankings.position " + order_dir)
+      else
+        @applications = @applications.order(params[:order] => order_dir)
+      end
     end
 
     respond_to do |format|
@@ -157,6 +162,7 @@ class ApplicationsController < ApplicationController
 
   def order_params
     {
+      position: "Ranked Position",
       created_at: "Date Created",
       student_id: "Student Number",
       first_name: "First Name",
