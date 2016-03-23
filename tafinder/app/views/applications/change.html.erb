@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <% @term_options.each do |term| %>
                     <label class="checkbox-inline">
-                        <input id="term-<%= term.to_s %>-input" type="checkbox" name="application[term_ids][]" value="<%= term.id %>" />
+                        <input id="term-<%= term.to_s %>-input" type="checkbox" name="application[term_id]" value="<%= term.id %>" />
                         <span><%= term.to_s %></span>
                     </label>
                     <% end %>

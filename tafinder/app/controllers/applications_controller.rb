@@ -101,15 +101,16 @@ class ApplicationsController < ApplicationController
   end
 
   def request_change
+    # TODO(scott): this is a hack, fix it
     # TODO(scott): we also need to find_by year and semester
-    @application = Application.joins(:term).find_by(student_id: application_params[:student_id], term: {id: application_params[:term_id]})
+    @application = Application.joins(:term).find_by(student_id: application_params[:student_id], term_id:application_params[:term_id])
 
     if @application.present?
       flash[:success] = "An email has been sent requesting for your application to be changed."
 
       UserMailer.change_application_request_email(@application, params[:message]).deliver
     else
-      flash[:danger] = "Could not find an application associated with that email."
+      flash[:danger] = "Could not find an application associated with that student number."
     end
 
     redirect_to(action: :change)
