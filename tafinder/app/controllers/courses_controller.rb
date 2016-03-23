@@ -19,7 +19,7 @@ class CoursesController < ApplicationController
     # params[:course_file]
     Spreadsheet.client_encoding = 'UTF-8'
 
-    workbook = Spreadsheet.open 'public/courses_data.xls'
+    workbook = Spreadsheet.open(Rails.root.to_s + '/public/courses_data.xls')
 
     # Get the first worksheet in the Excel file
     @worksheet = workbook.worksheet(0)
