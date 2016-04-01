@@ -10,11 +10,34 @@ class CoursesController < ApplicationController
       format.csv { render text: @applications.to_csv }
       format.xls
     end
-
   end
 
-  def import
 
+  def new
+    @terms = Term.all.order(year: :desc, semester: :desc)
+  end
+
+
+  def create
+    term = Term.find(course_params[:term_id])
+
+    if (term.present?)
+      course = term.courses.create(course_params)
+
+      if (course.valid?)
+        flash[:success] = "Your course has been created"
+      else
+        flash[:danger] = course.errors.full_messages.first
+      end
+    else
+      flash[:danger] = "Could not find terms with the supplied ID"
+    end
+
+    redirect_to(action: :index)
+  end
+
+
+  def import
     require 'spreadsheet'
     # params[:course_file]
     Spreadsheet.client_encoding = 'UTF-8'
@@ -59,5 +82,16 @@ class CoursesController < ApplicationController
     redirect_to(action: :index)
   end
 
+
+  private
+
+  def course_params
+    params.require(:course).permit(
+      :subject,
+      :number,
+      :graduate,
+      :term_id
+    )
+  end
 
 end

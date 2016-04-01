@@ -1,15 +1,27 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
-            <h1><b>Application for</b><br/> Undergraduate/Graduate Teaching <br/>Assistantship</h1>
+            <h1>Create a Course</h1>
+            <hr>
         </div>
     </div>
 
     <div class="row">
         <div class="col-xs-12">
-            <form accept-charset="UTF-8" action="<%= create_application_path %>" method="post">
-            <%= render(partial: "form", locals: { application: nil }) %>
+            <% if (@terms.present?) %>
+
+            <form class="container-fluid" accept-charset="UTF-8" action="<%= create_course_path %>" method="post">
+            <%= render(partial: "form", locals: { course: nil, terms: @terms }) %>
             </form>
+            <hr>
+
+            <% else %>
+
+            <div class="well well-lg text-center">
+                <h4>A course must belong to a term and no terms have been created. Please create a term.</h4>
+            </div>
+
+            <% end %>
         </div>
     </div>
 </div>

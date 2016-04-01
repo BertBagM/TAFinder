@@ -1,22 +1,29 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
-            <form class="form-inline" accept-charset="UTF-8" action="<%= import_courses_path %>" method="post">
-                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+            <div class="clearfix">
+                <form class="form-inline pull-left" accept-charset="UTF-8" action="<%= import_courses_path %>" method="post">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
 
-                <div class="form-group">
-                    <label class="btn btn-primary" for="import-course-input">
-                        <input id="import-course-input" type="file" name="course_file" style="display:none;" />
-                        <span>Browse</span>
-                    </label>
+                    <div class="form-group">
+                        <label class="btn btn-primary" for="import-course-input">
+                            <input id="import-course-input" type="file" name="course_file" style="display:none;" />
+                            <span>Browse</span>
+                        </label>
 
-                    <button class="btn btn-primary" type="submit">Upload</button>
-                </div>
+                        <button class="btn btn-primary" type="submit">Upload</button>
+                    </div>
 
-                <div class="form-group">
-                    <a href="<%= courses_path(format: "xls" ) %>" class="btn btn-primary">Export</a>
-                </div>
-            </form>
+                    <div class="form-group">
+                        <a href="<%= courses_path(format: "xls" ) %>" class="btn btn-primary">Export</a>
+                    </div>
+                </form>
+
+                <a href="<%= new_course_path %>" class="btn btn-primary pull-right">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span>Add Course</span>
+                </a>
+            </div>
 
             <hr>
 
@@ -32,11 +39,25 @@
                 <table class="table table-bordered table-hover">
                     <tr>
                         <th colspan="17">
-                            <h3 class="pull-left"><%= course.to_s %></h3>
+                            <div class="pull-left">
+                                <h3 class="inline-header"><%= course.to_s %></h3>
+                                <a href="" class="btn btn-primary btn-narrow add-section-btn">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    <span>Add Section</span>
+                                </a>
+                            </div>
                             <h5 class="pull-right"><%= course.term.to_s %></h5>
                         </th>
                     </tr>
 
+                    <% if (course.sections.empty?) %>
+                    <tr>
+                        <th colspan="17">
+                            <h5>No sections have been added for this course.</h5>
+                        </th>
+                    </tr>
+
+                    <% else %>
                     <tr>
                         <th>Instructor</th>
                         <th>Section</th>
@@ -79,6 +100,7 @@
                             <a href="<%# course_edit_path(course) %>" class="glyphicon glyphicon-pencil"></a>
                         </td>
                     </tr>
+                    <% end %>
                     <% end %>
                 <% end %>
             </table>

@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     delete 'applications/:id', to: 'applications#destroy', as: 'destroy_application'
 
     get 'courses', to: 'courses#index', as: 'courses'
+    get 'courses/new', to: 'courses#new', as: 'new_course'
+    post 'courses', to: 'courses#create', as: 'create_course'
     post 'courses/import', to: 'courses#import', as: 'import_courses'
 
    # get 'courses/export', to: 'courses#export', as: 'export_courses'

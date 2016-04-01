@@ -23,12 +23,22 @@ $primary-text-color: #002145;
 
 h1, h2, h3, h4, h5, h6 {
     color: #022244;
+
+    &.inline-header {
+        display: inline-block;
+    }
 }
 
-.btn.btn-primary {
-    background-color: #286090;
-    border-color: #204d74;
-    color: #ffffff;
+.btn {
+    &.btn-primary {
+        background-color: #286090;
+        border-color: #204d74;
+        color: #ffffff;
+    }
+
+    &.btn-narrow {
+        padding: 2px 8px;
+    }
 }
 
 #header-container {

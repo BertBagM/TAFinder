@@ -1,0 +1,45 @@
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+
+<div class="row">
+    <div class="form-group col-xs-12 col-sm-8">
+        <label for="subject-input">Subject</label>
+        <input id="subject-input" class="form-control" type="text" name="course[subject]" value="<%= course.subject if course.present? %>" placeholder="Subject" />
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-4">
+        <label for="number-input">Course Number</label>
+        <input id="number-input" class="form-control" type="text" name="course[number]" value="<%= course.number if course.present? %>" placeholder="Number" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-xs-12">
+        <p><b>Term</b></p>
+        <% @terms.each do |term| %>
+            <label class="radio-inline">
+                <input type="radio" name="course[term_id]" value="<%= term.id %>" <%= "checked" if course.present? && course.term.id == term.id %> />
+                <span><%= term.to_s %></span>
+            </label>
+        <% end %>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-xs-12">
+        <p><b>Level of Study Requirements</b></p>
+        <label class="radio-inline">
+            <input type="radio" name="course[graduate]" value="U" <%= "checked" if course.present? && course.graduate == "U" %> />
+            <span>Undergraduate</span>
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="course[graduate]" value="1" <%= "checked" if course.present? && course.graduate == "1" %> />
+            <span>Graduate (Master)</span>
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="course[graduate]" value="2" <%= "checked" if course.present? && course.graduate == "2" %> />
+            <span>Graduate (Above)</span>
+        </label>
+    </div>
+</div>
+
+<button class="btn btn-primary" type="submit">Create</button>
