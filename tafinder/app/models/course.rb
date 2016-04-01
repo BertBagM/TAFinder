@@ -8,4 +8,9 @@ class Course < ActiveRecord::Base
     presence: true
   validates :graduate,
     presence: true
+
+
+  def to_s
+    "#{subject} #{number}"
+  end
 end

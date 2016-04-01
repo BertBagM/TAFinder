@@ -20,7 +20,7 @@
 
             <hr>
 
-            <% if (@sections.empty?) %>
+            <% if (@courses.empty?) %>
 
             <div class="well well-lg text-center">
                 <h4>No courses to display.</h4>
@@ -28,55 +28,58 @@
 
             <% else %>
 
-            <table class="table table-bordered table-hover">
-                <tr>
-                    <th>Instructor</th>
-                    <th>Subject</th>
-                    <th>Number</th>
-                    <th>Section</th>
-                    <th>Term</th>
-                    <th>Act Type</th>
-                    <th>Days Met</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th>Lab Hours</th>
-                    <th>Marking Hours</th>
-                    <th>Coordination Hours</th>
-                    <th>Graduate</th>
-                    <th>Estimated Enrollment</th>
-                    <th>Enrollment</th>
-                    <th>Released</th>
-                    <th>Capacity</th>
-                    <th>Building</th>
-                    <th>Room</th>
-                    <th></th>
-                </tr>
+                <% @courses.each do |course| %>
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th colspan="17">
+                            <h3 class="pull-left"><%= course.to_s %></h3>
+                            <h5 class="pull-right"><%= course.term.to_s %></h5>
+                        </th>
+                    </tr>
 
-                <% @sections.each do |section| %>
-                <tr>
-                    <td><%= section.instructor_name %></td>
-                    <td><%= section.course.subject %></td>
-                    <td><%= section.course.number %></td>
-                    <td><%= section.number %></td>
-                    <td><%= section.term.to_s %></td>
-                    <td><%= section.act_type %></td>
-                    <td><%= section.days %></td>
-                    <td><%= section.start_time.strftime("%I:%M %p") if section.start_time %></td>
-                    <td><%= section.end_time.strftime("%I:%M %p") if section.end_time %></td>
-                    <td><%= section.lab_hours %></td>
-                    <td><%= section.marking_hours %></td>
-                    <td><%= section.coord_hours %></td>
-                    <td><%= section.course.graduate %></td>
-                    <td><%= section.enrolled_est %></td>
-                    <td><%= section.enrolled %></td>
-                    <td><%= section.released %></td>
-                    <td><%= section.capacity %></td>
-                    <td><%= section.building %></td>
-                    <td><%= section.room %></td>
-                    <td>
-                        <a href="<%# course_edit_path(course) %>" class="glyphicon glyphicon-pencil"></a>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>Instructor</th>
+                        <th>Section</th>
+                        <th>Act Type</th>
+                        <th>Days Met</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Lab Hours</th>
+                        <th>Marking Hours</th>
+                        <th>Coordination Hours</th>
+                        <th>Graduate</th>
+                        <th>Estimated Enrollment</th>
+                        <th>Enrollment</th>
+                        <th>Released</th>
+                        <th>Capacity</th>
+                        <th>Building</th>
+                        <th>Room</th>
+                        <th></th>
+                    </tr>
+
+                    <% course.sections.order(number: :asc).each do |section| %>
+                    <tr>
+                        <td><%= section.instructor_name %></td>
+                        <td><%= section.number %></td>
+                        <td><%= section.act_type %></td>
+                        <td><%= section.days %></td>
+                        <td><%= section.start_time.strftime("%I:%M %p") if section.start_time %></td>
+                        <td><%= section.end_time.strftime("%I:%M %p") if section.end_time %></td>
+                        <td><%= section.lab_hours %></td>
+                        <td><%= section.marking_hours %></td>
+                        <td><%= section.coord_hours %></td>
+                        <td><%= course.graduate %></td>
+                        <td><%= section.enrolled_est %></td>
+                        <td><%= section.enrolled %></td>
+                        <td><%= section.released %></td>
+                        <td><%= section.capacity %></td>
+                        <td><%= section.building %></td>
+                        <td><%= section.room %></td>
+                        <td>
+                            <a href="<%# course_edit_path(course) %>" class="glyphicon glyphicon-pencil"></a>
+                        </td>
+                    </tr>
+                    <% end %>
                 <% end %>
             </table>
 

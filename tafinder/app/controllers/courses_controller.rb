@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
 
 
   def index
-    @sections = Section.all
+    @courses = Course.all.order(subject: :asc, number: :asc)
 
     respond_to do |format|
       format.html
