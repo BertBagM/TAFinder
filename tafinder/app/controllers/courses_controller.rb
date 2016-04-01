@@ -30,7 +30,7 @@ class CoursesController < ApplicationController
         flash[:danger] = course.errors.full_messages.first
       end
     else
-      flash[:danger] = "Could not find terms with the supplied ID"
+      flash[:danger] = "Could not find a term with the supplied ID"
     end
 
     redirect_to(action: :index)

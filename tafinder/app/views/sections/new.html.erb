@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Create a Section for <%= @course.to_s %> (<%= @course.term.to_s %>)</h1>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <form class="container-fluid" accept-charset="UTF-8" action="<%= create_section_path %>" method="post">
+            <%= render(partial: "form", locals: { course_id: params[:course_id], section: nil }) %>
+            </form>
+            <hr>
+        </div>
+    </div>
+</div>

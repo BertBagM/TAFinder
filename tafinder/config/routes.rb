@@ -25,7 +25,8 @@ Rails.application.routes.draw do
     post 'courses', to: 'courses#create', as: 'create_course'
     post 'courses/import', to: 'courses#import', as: 'import_courses'
 
-   # get 'courses/export', to: 'courses#export', as: 'export_courses'
+    get 'courses/:course_id/sections/new', to: 'sections#new', as: 'new_section'
+    post 'courses/:course_id/sections', to: 'sections#create', as: 'create_section'
 
     get 'terms', to: 'terms#index', as: 'terms'
     post 'terms', to: 'terms#create', as: 'create_term'

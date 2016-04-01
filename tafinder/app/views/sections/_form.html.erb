@@ -1,0 +1,94 @@
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+
+<input type="hidden" name="section[course_id]" value="<%= course_id %>" />
+
+<div class="row">
+    <div class="form-group col-xs-12 col-sm-8">
+        <label for="number-input">Section Number</label>
+        <input id="number-input" class="form-control" type="text" name="section[number]" value="<%= section.number if section.present? %>" placeholder="Number" />
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-4">
+        <label form "act-type-input">Type</label>
+        <select id="act-type-input" class="form-control" type="select" name="section[act_type]">
+            <option value="LEC" <%= "checked" if section.present? && section.act_type == 'LEC' %>>Lecture</option>
+            <option value="LAB" <%= "checked" if section.present? && section.act_type == 'LAB' %>>Laboratory</option>
+            <option value="TUT" <%= "checked" if section.present? && section.act_type == 'TUT' %>>Tutorial</option>
+            <option value="SEM" <%= "checked" if section.present? && section.act_type == 'SEM' %>>Seminar</option>
+        </select>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-xs-12">
+        <label for="instructor-name-input">Instructor Name</label>
+        <input id="instructor-name-input" class="form-control" type="text" name="section[instructor_name]" value="<%= section.instructor_name if section.present? %>" placeholder="Instructor" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-xs-12 col-sm-6">
+        <label for="building-input">Building</label>
+        <input id="building-input" class="form-control" type="text" name="section[building]" value="<%= section.building if section.present? %>" placeholder="Building" />
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-6">
+        <label for="room-input">Room</label>
+        <input id="room-input" class="form-control" type="text" name="section[room]" value="<%= section.room if section.present? %>" placeholder="Room" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-xs-12 col-sm-6">
+        <label for="start-time-input">Start Time</label>
+        <input id="start-time-input" class="form-control" type="text" name="section[start_time]" value="<%= section.start_time if section.present? %>" placeholder="Start Time" />
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-6">
+        <label for="end-time-input">End Time</label>
+        <input id="end-time-input" class="form-control" type="text" name="section[end_time]" value="<%= section.end_time if section.present? %>" placeholder="End Time" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-xs-12 col-sm-4">
+        <label for="lab-hours-input">Lab Hours</label>
+        <input id="lab-hours-input" class="form-control" type="number" name="section[lab_hours]" value="<%= section.present? ? section.lab_hours : 0 %>" placeholder="Lab Hours" />
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-4">
+        <label for="marking-hours-input">Marking Hours</label>
+        <input id="marking-hours-input" class="form-control" type="number" name="section[marking_hours]" value="<%= section.present? ? section.marking_hours : 0 %>" placeholder="Marking Hours" />
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-4">
+        <label for="coord-hours-input">Coordination Hours</label>
+        <input id="coord-hours-input" class="form-control" type="number" name="section[coord_hours]" value="<%= section.present? ? section.coord_hours : 0 %>" placeholder="Coord Hours" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-xs-12 col-sm-6">
+        <label for="enrolled-est-input">Enrollment Estimate</label>
+        <input id="enrolled-est-input" class="form-control" type="number" name="section[enrolled_est]" value="<%= section.present? ? section.enrolled_est : 0 %>" placeholder="Enrollment Estimate" />
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-6">
+        <label for="enrolled-input">Enrolled</label>
+        <input id="enrolled-input" class="form-control" type="number" name="section[enrolled]" value="<%= section.present? ? section.enrolled : 0 %>" placeholder="Enrolled" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-xs-12 col-sm-6">
+        <label for="released-input">Released</label>
+        <input id="released-input" class="form-control" type="number" name="section[released]" value="<%= section.present? ? section.released : 0 %>" placeholder="Released" />
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-6">
+        <label for="capacity-input">Capacity</label>
+        <input id="capacity-input" class="form-control" type="number" name="section[capacity]" value="<%= section.present? ? section.capacity : 0 %>" placeholder="Capacity" />
+    </div>
+</div>
+
+<button class="btn btn-primary" type="submit">Create</button>
