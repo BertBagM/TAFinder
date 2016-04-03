@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-xs-12">
             <form class="container-fluid" accept-charset="UTF-8" action="<%= create_section_path %>" method="post">
-            <%= render(partial: "form", locals: { course_id: params[:course_id], section: nil }) %>
+            <%= render(partial: "form", locals: { section: nil, course_id: params[:course_id] }) %>
             </form>
             <hr>
         </div>

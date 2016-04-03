@@ -36,8 +36,8 @@
             <% else %>
 
                 <% @courses.each do |course| %>
-                <table class="table table-bordered table-hover">
-                    <tr>
+                <table class="table table-bordered">
+                    <tr class="table-header">
                         <th colspan="17">
                             <div class="pull-left">
                                 <h3 class="inline-header"><%= course.to_s %></h3>
@@ -46,7 +46,13 @@
                                     <span>Add Section</span>
                                 </a>
                             </div>
-                            <h5 class="pull-right"><%= course.term.to_s %></h5>
+                            <div class="pull-right">
+                                <h5><%= course.term.to_s %></h5>
+                                <div>
+                                    <a href="<%= edit_course_path(course) %>" class="glyphicon glyphicon-pencil pull-left"></a>
+                                    <a href="<%= destroy_course_path(course) %>" class="glyphicon glyphicon-trash pull-right" rel="nofollow" data-method="delete"></a>
+                                </div>
+                            </div>
                         </th>
                     </tr>
 
@@ -97,7 +103,8 @@
                         <td><%= section.building %></td>
                         <td><%= section.room %></td>
                         <td>
-                            <a href="<%# course_edit_path(course) %>" class="glyphicon glyphicon-pencil"></a>
+                            <a href="<%= edit_section_path(course, section) %>" class="glyphicon glyphicon-pencil pull-left"></a>
+                            <a href="<%= destroy_section_path(course, section) %>" class="glyphicon glyphicon-trash pull-right" rel="nofollow" data-method="delete"></a>
                         </td>
                     </tr>
                     <% end %>

@@ -24,9 +24,18 @@ Rails.application.routes.draw do
     get 'courses/new', to: 'courses#new', as: 'new_course'
     post 'courses', to: 'courses#create', as: 'create_course'
     post 'courses/import', to: 'courses#import', as: 'import_courses'
+    get 'courses/:id/edit', to: 'courses#edit', as: 'edit_course'
+    patch 'courses/:id', to: 'courses#update', as: 'update_course'
+    put 'courses/:id', to: 'courses#update'
+    delete 'courses/:id', to: 'courses#destroy', as: 'destroy_course'
 
     get 'courses/:course_id/sections/new', to: 'sections#new', as: 'new_section'
     post 'courses/:course_id/sections', to: 'sections#create', as: 'create_section'
+    get 'courses/:course_id/sections/:id/edit', to: 'sections#edit', as: 'edit_section'
+    patch 'courses/:course_id/sections/:id', to: 'sections#update', as: 'update_section'
+    put 'courses/:course_id/sections/:id', to: 'sections#update'
+    delete 'courses/:course_id/sections/:id', to: 'sections#destroy', as: 'destroy_section'
+
 
     get 'terms', to: 'terms#index', as: 'terms'
     post 'terms', to: 'terms#create', as: 'create_term'

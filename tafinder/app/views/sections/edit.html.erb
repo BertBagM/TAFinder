@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Edit Section <%= @section.to_s %></h1>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <form accept-charset="UTF-8" action="<%= update_section_path(@section.course, @section) %>" method="post">
+                <input name="_method" type="hidden" value="patch" />
+                <%= render(partial: "form", locals: { section: @section, course_id: params[:course_id] }) %>
+            </form>
+            <hr>
+        </div>
+    </div>
+</div>

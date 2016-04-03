@@ -22,6 +22,10 @@ class Section < ActiveRecord::Base
     presence: true
 
 
+  def to_s
+    "#{course.to_s} #{number}"
+  end
+
   def total_hours
     lab_hours + marking_hours + coord_hours
   end

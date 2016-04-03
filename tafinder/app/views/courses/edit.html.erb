@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Edit Course <%= @course.to_s %></h1>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <form accept-charset="UTF-8" action="<%= update_course_path(@course) %>" method="post">
+                <input name="_method" type="hidden" value="patch" />
+                <%= render(partial: "form", locals: { course: @course, terms: @terms }) %>
+            </form>
+            <hr>
+        </div>
+    </div>
+</div>

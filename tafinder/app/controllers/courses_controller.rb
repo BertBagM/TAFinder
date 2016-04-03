@@ -83,6 +83,42 @@ class CoursesController < ApplicationController
   end
 
 
+  def edit
+    @course = Course.find(params[:id])
+    @terms = Term.all.order(year: :desc, semester: :desc)
+
+    if @course.nil?
+      flash[:warning] = "No course was found with ID #{params[:id]}."
+      redirect_to(action: :index)
+    end
+  end
+
+
+  def update
+    @course = Course.find(params[:id])
+
+    if @course.update_attributes(course_params)
+      redirect_to(action: :index)
+    else
+      flash[:danger] = "Unable to modify Course."
+      render(action: :edit)
+    end
+  end
+
+
+  def destroy
+    @course = Course.find(params[:id])
+
+    if @course.destroy()
+      flash[:success] = "The course has been removed."
+    else
+      flash[:danger] = "Unable to remove the course."
+    end
+
+    redirect_to(action: :index)
+  end
+
+
   private
 
   def course_params
