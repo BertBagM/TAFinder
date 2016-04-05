@@ -4,8 +4,10 @@ class ApplicationsController < ApplicationController
 
 
   def index
+    @courses = Course.all
     @applications = Application.all.joins(:term)
     @applications = @applications.all.joins(:ranking)
+    @applications = @applications.joins({:preferred_courses => :course}).group('applications.id')
     @order_options = order_params()
     @order_dir_options = order_dir_params()
 
@@ -25,6 +27,10 @@ class ApplicationsController < ApplicationController
 
     if (params[:filter_grad] == "on")
       @applications = @applications.where(graduate: true)
+    end
+
+    if (!params[:filter_subjects].nil? and !params[:filter_subjects].empty?)
+      @applications = @applications.where(courses: {subject: params[:filter_subjects]})
     end
 
     if (validate_param(params[:order], order_params))

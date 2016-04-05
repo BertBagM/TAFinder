@@ -47,6 +47,19 @@
                         </label>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label>Subjects</label>
+                    <br>
+
+                    <% @courses.pluck(:subject).uniq.each do |subject| %>
+
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="filter_subjects[]" value="<%= subject %>" <%= "checked" if (!params[:filter_subjects].nil? and params[:filter_subjects].include? subject) %>/>
+                        <span><%= subject %></span>
+                    </label>
+
+                    <% end %>
+                </div>
             </form>
 
             <hr>
