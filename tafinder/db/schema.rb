@@ -40,12 +40,12 @@ ActiveRecord::Schema.define(version: 20160330003216) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string   "subject",    limit: 4,               null: false
-    t.string   "number",     limit: 3,               null: false
-    t.string   "graduate",   limit: 1, default: "U", null: false
-    t.integer  "term_id",                            null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.string   "subject",    limit: 4
+    t.string   "number",     limit: 3
+    t.string   "graduate",   limit: 1, default: "U"
+    t.integer  "term_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "preferred_courses", force: :cascade do |t|

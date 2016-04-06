@@ -27,29 +27,9 @@
 
   <% @courses.each do |course| %>
       <tr>
-        <td><%= course.instructor_name %></td>
         <td><%= course.subject %></td>
         <td><%= course.number%></td>
-        <th></th>
-        <td><%= course.section %></td>
-        <td><%= course.term %></td>
-        <td><%= course.act_type %></td>
-        <td><%= course.days %></td>
-        <td><%= course.start_time.strftime("%I:%M %p") if course.start_time %></td>
-        <td><%= course.end_time.strftime("%I:%M %p") if course.start_time %></td>
-        <th>Last</th>
-        <th>First</th>
-        <td><%= course.lab_time %></td>
-        <td><%= course.mark_time %></td>
-        <td><%= course.coord_time %></td>
-        <td>Graduate</td>
-        <th></th>
-        <td><%= course.enrolled_est %></td>
-        <td><%= course.released %></td>
-        <td><%= course.enrolled %></td>
-        <td><%= course.building %></td>
-        <td><%= course.room %></td>
-        <td><%= course.capacity %></td>
+        <td><%= course.term_id %></td>
       </tr>
   <% end %>
 </table>
