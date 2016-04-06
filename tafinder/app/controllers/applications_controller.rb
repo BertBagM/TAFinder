@@ -22,7 +22,7 @@ class ApplicationsController < ApplicationController
     end
 
     if (params[:filter_term] == "on")
-      @applications = @applications.where(term: { open: true })
+      @applications = @applications.where(terms: { open: true })
     end
 
     if (params[:filter_grad] == "on")

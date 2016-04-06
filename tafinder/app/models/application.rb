@@ -116,8 +116,10 @@ class Application < ActiveRecord::Base
 
   def ranking_alg
     score = 0
-    if ((self.faculty == "Sciences") || (self.program == "Computer Science"))
-      if (self.graduate)
+    if ((self.program.downcase == "mathematics") || (self.program.downcase == "computer science") ||
+      (self.program.downcase == "physics") || (self.program.downcase == "astronomy") || (self.program.downcase == "statistics"))
+      puts "HEREREERERERERERE"
+      if (graduate)
         score += 0.5
       else
         score += (self.study_year * 0.025)
@@ -132,6 +134,7 @@ class Application < ActiveRecord::Base
         score += 0.1
       end
     end
+    puts score
     score
   end
 

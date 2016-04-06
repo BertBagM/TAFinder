@@ -11,8 +11,8 @@
             <p><b>Applications are now open!</b> Please note: only those applicants selected will be contacted with an offer.</p>
 
             <% @terms.each do |term| %>
-            <p><a href="<%= new_application_path %>"><%= "#{term.year} #{term.semester.capitalize}" %> TA Application - Term <%= term.semester_index %></a></p>
-            <p>The deadline for timely applications is <%= !term.summer? ? "April 30, #{term.year}" : "January 30, #{term.year}" %>. We accept applications after that point and are often able to appoint some late applicants, but priority goes to on-time applications.</p>
+            <p><a href="<%= new_application_path %>"><%= "#{term.year} " + ((term.semester == "fallWinter") ? "Fall/Winter" : "Spring/Summer") %> TA Application - Term <%= term.semester_index %></a></p>
+            <p>The deadline for timely applications is <%= !term.springSummer? ? "April 30, #{term.year}" : "January 30, #{term.year}" %>. We accept applications after that point and are often able to appoint some late applicants, but priority goes to on-time applications.</p>
             <% end %>
 
             <% else %>
