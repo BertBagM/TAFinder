@@ -41,7 +41,7 @@ class Application < ActiveRecord::Base
     inclusion: {
       in: [true, false]
     }
-  validates :graduate_full_time,
+  validates :full_time,
     inclusion: {
       in: [true, false]
     }
@@ -122,7 +122,7 @@ class Application < ActiveRecord::Base
       else
         score += (self.study_year * 0.025)
       end
-      if (self.graduate_full_time)
+      if (self.full_time)
         score += 0.1
       end
       if (self.gpa)

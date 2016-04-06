@@ -122,13 +122,13 @@
 
 <div class="row">
     <div class="form-group col-xs-12">
-        <p><b>Will you be a full-time graduate student in the term(s) you are applying for?</b></p>
+        <p><b>Will you be a full-time student in the term(s) you are applying for?</b></p>
         <label class="radio-inline">
-            <input type="radio" name="application[graduate_full_time]" value="true" <%= "checked" if application.present? && application.graduate_full_time %> />
+            <input type="radio" name="application[full_time]" value="true" <%= "checked" if application.present? && application.full_time %> />
             Yes
         </label>
         <label class="radio-inline">
-            <input type="radio" name="application[graduate_full_time]" value="false" <%= "checked" if application.present? && !application.graduate_full_time %> />
+            <input type="radio" name="application[full_time]" value="false" <%= "checked" if application.present? && !application.full_time %> />
             <span>No</span>
         </label>
     </div>
