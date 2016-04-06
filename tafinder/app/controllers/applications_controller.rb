@@ -146,7 +146,7 @@ class ApplicationsController < ApplicationController
       :faculty,
       :study_year,
       :graduate,
-      :graduate_full_time,
+      :full_time,
       :ubc_employee_id,
       :program,
       :gender,

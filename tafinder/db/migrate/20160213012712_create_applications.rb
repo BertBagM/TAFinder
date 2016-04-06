@@ -10,7 +10,7 @@ class CreateApplications < ActiveRecord::Migration
       t.string    :faculty, null: false
       t.integer   :study_year, default: 1, null: false
       t.boolean   :graduate, default: false, null: false
-      t.boolean   :graduate_full_time, default: false, null: false
+      t.boolean   :full_time, default: false, null: false
       t.integer   :ubc_employee_id
       t.string    :program
       t.string    :gender, null: false
