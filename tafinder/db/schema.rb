@@ -56,11 +56,11 @@ ActiveRecord::Schema.define(version: 20160330003216) do
   end
 
   create_table "rankings", force: :cascade do |t|
-    t.integer  "application_id",                 null: false
-    t.integer  "position"
-    t.boolean  "locked",         default: false, null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "application_id",                                         null: false
+    t.decimal  "position",       precision: 5, scale: 3
+    t.boolean  "locked",                                 default: false, null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
   end
 
   create_table "sections", force: :cascade do |t|
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20160330003216) do
 
   create_table "terms", force: :cascade do |t|
     t.string   "year",       limit: 4,                 null: false
-    t.string   "semester",   limit: 1, default: "F",   null: false
+    t.string   "semester",   limit: 3, default: "F/W", null: false
     t.boolean  "open",                 default: false, null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false

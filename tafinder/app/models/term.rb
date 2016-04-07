@@ -4,9 +4,8 @@ class Term < ActiveRecord::Base
   has_many :courses, dependent: :nullify
 
   enum semester: {
-    winter: "W",
-    fall: "F",
-    summer: "S"
+    fallWinter: "F/W",
+    springSummer: "S/S"
   }
 
   validates :semester,
@@ -29,12 +28,10 @@ class Term < ActiveRecord::Base
   end
 
   def semester_index
-    if (fall?)
+    if (fallWinter?)
       1
-    elsif (winter?)
+    elsif (springSummer?)
       2
-    elsif (summer?)
-      3
     else
       -1
     end

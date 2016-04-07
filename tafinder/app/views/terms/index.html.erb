@@ -14,7 +14,7 @@
                     <label form="term-semester-input">Semester</label>
                     <select id="term-semester-input" class="form-control" name="term[semester]">
                         <% @semester_options.each do |name, value| %>
-                        <option value="<%= value %>"><%= name %></option>
+                        <option value="<%= value %>"><%= (name == "fallWinter") ? "fall/winter" : "spring/summer"%></option>
                         <% end %>
                     </select>
                 </div>
@@ -36,7 +36,7 @@
                 <% @terms.each do |term| %>
                 <tr>
                     <td><%= term.year %></td>
-                    <td><%= term.semester %></td>
+                    <td><%= (term.semester == "fallWinter") ? "fall/winter" : "spring/summer" %></td>
                     <td>
                         <form class="form-inline" accept-charset="UTF-8" action="<%= update_term_path(term) %>" method="post">
                             <input name="_method" type="hidden" value="patch" />

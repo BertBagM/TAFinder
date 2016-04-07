@@ -19,7 +19,7 @@ if (Rails.env == "development")
   terms = Term.create([
     {
       year: "2016",
-      semester: "W",
+      semester: "F/W",
       open: true
     }
   ])
