@@ -133,7 +133,6 @@ class Application < ActiveRecord::Base
         score += 0.1
       end
     end
-    puts score
     score
   end
 
