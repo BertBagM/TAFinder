@@ -118,7 +118,6 @@ class Application < ActiveRecord::Base
     score = 0
     if ((self.program.downcase == "mathematics") || (self.program.downcase == "computer science") ||
       (self.program.downcase == "physics") || (self.program.downcase == "astronomy") || (self.program.downcase == "statistics"))
-      puts "HEREREERERERERERE"
       if (graduate)
         score += 0.5
       else
