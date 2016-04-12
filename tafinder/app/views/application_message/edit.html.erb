@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Edit Application Message</h1>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <form accept-charset="UTF-8" action="<%= update_application_message_path %>" method="post">
+                <input name="_method" type="hidden" value="patch" />
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+
+                <div class="row">
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <label for="first-name-input">Message</label>
+                        <textarea id="first-name-input" class="form-control" type="text" name="application_message[message]" rows="24"><%= @message.message %></textarea>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <br>
+
+                        <p>This is the message the will greet TA candidates on the home page of the website.</p>
+
+                        <p>
+                            <span>This message can either be written in plain text or as HTML. </span>
+                            <span>Add <code>$LINK</code> in the message where you want the link to the application form to appear.</span>
+                        </p>
+
+                        <p><b>Example</b></p>
+                        <pre><%= "<p><b>Applications are now open!</b> Please note: only those applicants selected will be contacted with an offer.</p>\n"\
+                                "<p>$LINK</p>\n"\
+                                "<p>The deadline for timely applications is April 30, 2016. We accept applications after that point and are often able to appoint some late applicants, but priority goes to on-time applications.</p>" %></pre>
+
+                        <p><b>Output</b></p>
+                        <div class="well">
+                            <p><b>Applications are now open!</b> Please note: only those applicants selected will be contacted with an offer.</p>
+                            <p>
+                                <a href>2016 Fall/Winter TA Application - Term 1</a>
+                            </p>
+                            <p>The deadline for timely applications is April 30, 2016. We accept applications after that point and are often able to appoint some late applicants, but priority goes to on-time applications.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Save</button>
+            </form>
+            <hr>
+        </div>
+    </div>
+</div>

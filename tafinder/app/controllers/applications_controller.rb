@@ -134,6 +134,7 @@ class ApplicationsController < ApplicationController
     redirect_to(action: :index)
   end
 
+
   private
 
   def application_params

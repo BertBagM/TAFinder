@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     post 'login', to: 'sessions#create'
     post 'logout', to: 'sessions#destroy', as: 'logout'
 
+    get 'applications/message', to: 'application_message#edit', as: 'edit_application_message'
+    patch 'applications/update_message', to: 'application_message#update', as: 'update_application_message'
+    put 'applications/update_message', to: 'application_message#update'
+
     get 'applications', to: 'applications#index', as: 'applications'
     get 'applications/:id/edit', to: 'applications#edit', as: 'edit_application'
     patch 'applications/:id', to: 'applications#update', as: 'update_application'

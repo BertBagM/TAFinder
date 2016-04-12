@@ -15,6 +15,14 @@ users = User.create([
   }
 ])
 
+application_message = ApplicationMessage.create({
+  message: %{
+<p><b>Applications are now open!</b> Please note: only those applicants selected will be contacted with an offer.</p>
+<p>$LINK</p>
+<p>The deadline for timely applications is April 30, 2016. We accept applications after that point and are often able to appoint some late applicants, but priority goes to on-time applications.</p>
+           }
+})
+
 if (Rails.env == "development")
   terms = Term.create([
     {
