@@ -23,23 +23,4 @@ if (Rails.env == "development")
       open: true
     }
   ])
-
-  courses = terms.first.courses.create([
-    {
-      subject: "COSC",
-      number: "310"
-    }
-  ])
-
-  sections = courses.first.sections.create([
-    {
-      number: "L01",
-      instructor_name: "James",
-      act_type: "Lab",
-      days: "WT",
-      lab_hours: 4,
-      enrolled: 100,
-      building: "SCI"
-    }
-  ])
 end

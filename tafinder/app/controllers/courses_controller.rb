@@ -55,29 +55,57 @@ class CoursesController < ApplicationController
       # server doesn't support it, fall back to a normal login
       row = @worksheet.row(index)
 
-      next if (row[6] != "LEC")
 
-      Course.create(
-        ##instructor_name: row[0],
-        subject: row[1],
-        number: row[2],
-       ## section: row[4],
-        term_id: row[5]
-       ## act_type: row[6],
-       ##days: row[7],
-       ## start_time: row[8],
-       ## end_time: row[9],
-       ## lab_time: row[11].to_i,
-       ## mark_time: row[12].to_i,
-        ## coord_time: row[13].to_i,
-        ##enrolled_est: row[16].to_i,
-        ## enrolled: row[19].to_i,
-        ##released: row[18].to_i,
-        ##capacity: row[22].to_i,
-        ##building: row[20],
-        ##room: row[21]
+
+      term_id = Term.where(open: true).first.id
+
+
+      return if term_id.nil?
+
+
+
+      ## gets course_id query
+
+      course = Course.where(subject: row[1], number: row[2], term_id: term_id).first
+      if (course.nil?)
+          course =   Course.create(
+            subject: row[1],
+            number: row[2],
+            term_id: term_id,
+            graduate: row[15]
+        )
+
+
+
+      end
+
+      course_id = course.id
+
+      #create each section
+      Section.create(
+          course_id: course_id,
+          number: row[4],
+          instructor_name: row[0],
+          act_type: row[6],
+          days: row[7],
+          start_time: row[8],
+          end_time: row[9],
+          lab_hours: row[11].to_i,
+          marking_hours: row[12].to_i,
+          coord_hours: row[13].to_i,
+          ta_name: row[10],
+          hours: row[17].to_i,
+          enrolled_est: row[18].to_i,
+          enrolled: row[19].to_i,
+          released: row[18].to_i,
+          capacity: row[22].to_i,
+          building: row[20],
+          room: row[21]
       )
     end
+
+
+
 
     redirect_to(action: :index)
   end
