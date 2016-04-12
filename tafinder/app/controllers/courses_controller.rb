@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { render text: @applications.to_csv }
+      format.csv { render text: @courses.to_csv }
       format.xls
     end
   end
