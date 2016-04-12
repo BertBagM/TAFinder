@@ -3,9 +3,19 @@ class Section < ActiveRecord::Base
   has_one :term, through: :course
 
   validates :number,
-    presence: true
+    presence: true,
+    length: {
+      is: 3
+    }
   validates :act_type,
-    presence: true
+    presence: true,
+    length: {
+      is: 3
+    }
+  validates :days,
+    length: {
+      in: 0..5
+    }
   validates :lab_hours,
     presence: true
   validates :marking_hours,
@@ -20,6 +30,14 @@ class Section < ActiveRecord::Base
     presence: true
   validates :capacity,
     presence: true
+  validates :building,
+    length: {
+      is: 3
+    }
+  validates :room,
+    length: {
+      in: 0..4
+    }
 
 
   def to_s

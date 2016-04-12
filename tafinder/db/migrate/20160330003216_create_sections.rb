@@ -7,9 +7,9 @@ class CreateSections < ActiveRecord::Migration
       t.string  :days, limit: 5, default: ""
       t.time    :start_time
       t.time    :end_time
-      t.string :lab_hours
-      t.string :marking_hours
-      t.string :coord_hours
+      t.string  :lab_hours
+      t.string  :marking_hours
+      t.string  :coord_hours
       t.integer :hours
       t.integer :enrolled_est, default: 0
       t.integer :enrolled, default: 0

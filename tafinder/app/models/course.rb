@@ -3,11 +3,20 @@ class Course < ActiveRecord::Base
   belongs_to :term
 
   validates :subject,
-    presence: true
+    presence: true,
+    length: {
+      is: 4
+    }
   validates :number,
-    presence: true
+    presence: true,
+    length: {
+      is: 3
+    }
   validates :graduate,
-    presence: true
+    presence: true,
+    length: {
+      is: 1
+    }
 
 
   def to_s

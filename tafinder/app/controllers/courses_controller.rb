@@ -55,36 +55,32 @@ class CoursesController < ApplicationController
       # server doesn't support it, fall back to a normal login
       row = @worksheet.row(index)
 
+      term = Term.where(open: true).first
 
+      return if term.nil?
 
-      term_id = Term.where(open: true).first.id
-
-
-      return if term_id.nil?
-
-
+      term_id = term.id
 
       ## gets course_id query
-
       course = Course.where(subject: row[1], number: row[2], term_id: term_id).first
+
       if (course.nil?)
-          course =   Course.create(
-            subject: row[1],
-            number: row[2],
-            term_id: term_id,
-            graduate: row[15]
+        course = Course.create(
+          subject: row[1],
+          number: row[2],
+          term_id: term_id,
+          graduate: row[15] || "U"
         )
-
-
-
       end
+
+      return if course.nil?
 
       course_id = course.id
 
       #create each section
       Section.create(
           course_id: course_id,
-          number: row[4],
+          number: (row[4].to_s.rjust(3, '0') if row[4].present?),
           instructor_name: row[0],
           act_type: row[6],
           days: row[7],
@@ -94,7 +90,6 @@ class CoursesController < ApplicationController
           marking_hours: row[12].to_i,
           coord_hours: row[13].to_i,
           ta_name: row[10],
-          hours: row[17].to_i,
           enrolled_est: row[18].to_i,
           enrolled: row[19].to_i,
           released: row[18].to_i,

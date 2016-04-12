@@ -38,7 +38,7 @@
                 <% @courses.each do |course| %>
                 <table class="table table-bordered">
                     <tr class="table-header">
-                        <th colspan="17">
+                        <th colspan="18">
                             <div class="pull-left">
                                 <h3 class="inline-header"><%= course.to_s %></h3>
                                 <a href="<%= new_section_path(course) %>" class="btn btn-primary btn-narrow add-section-btn">
@@ -58,7 +58,7 @@
 
                     <% if (course.sections.empty?) %>
                     <tr>
-                        <th colspan="17">
+                        <th colspan="18">
                             <h5>No sections have been added for this course.</h5>
                         </th>
                     </tr>
