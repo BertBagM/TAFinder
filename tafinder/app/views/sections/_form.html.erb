@@ -9,7 +9,7 @@
     </div>
 
     <div class="form-group col-xs-12 col-sm-4">
-        <label form "act-type-input">Type</label>
+        <label for= "act-type-input">Type</label>
         <select id="act-type-input" class="form-control" type="select" name="section[act_type]">
             <option value="LEC" <%= "checked" if section.present? && section.act_type == 'LEC' %>>Lecture</option>
             <option value="LAB" <%= "checked" if section.present? && section.act_type == 'LAB' %>>Laboratory</option>
@@ -20,9 +20,14 @@
 </div>
 
 <div class="row">
-    <div class="form-group col-xs-12">
+    <div class="form-group col-xs-12 col-sm-6">
         <label for="instructor-name-input">Instructor Name</label>
         <input id="instructor-name-input" class="form-control" type="text" name="section[instructor_name]" value="<%= section.instructor_name if section.present? %>" placeholder="Instructor" />
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-6"">
+         <label for="ta-name-input">Teaching Assistant</label>
+         <input id="ta-name-input" class="form-control" type="text" name="section[ta_name]" value="<%= section.ta_name if section.present? %>" placeholder="Teaching assistant" />
     </div>
 </div>
 

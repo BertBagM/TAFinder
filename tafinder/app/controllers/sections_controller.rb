@@ -74,6 +74,7 @@ class SectionsController < ApplicationController
       :enrolled_est,
       :enrolled,
       :released,
+      :ta_name,
       :capacity,
       :building,
       :room,

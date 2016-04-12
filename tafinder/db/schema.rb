@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20160330003216) do
     t.integer  "enrolled_est",              default: 0
     t.integer  "enrolled",                  default: 0
     t.integer  "released",                  default: 0
+    t.string   "ta_name"
     t.integer  "capacity",                  default: 0
     t.string   "building",        limit: 3
     t.string   "room",            limit: 4

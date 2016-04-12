@@ -71,6 +71,7 @@
                         <th>Days Met</th>
                         <th>Start Time</th>
                         <th>End Time</th>
+                        <th>Teaching Assistant</th>
                         <th>Lab Hours</th>
                         <th>Marking Hours</th>
                         <th>Coordination Hours</th>
@@ -92,6 +93,7 @@
                         <td><%= section.days %></td>
                         <td><%= section.start_time.strftime("%I:%M %p") if section.start_time %></td>
                         <td><%= section.end_time.strftime("%I:%M %p") if section.end_time %></td>
+                        <td><%= section.ta_name %></td>
                         <td><%= section.lab_hours %></td>
                         <td><%= section.marking_hours %></td>
                         <td><%= section.coord_hours %></td>
